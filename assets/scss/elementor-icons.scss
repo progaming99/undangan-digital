@@ -1,0 +1,45 @@
+//
+// Elementor Icon Font
+//
+$version: '5.16.0';
+
+@font-face {
+	font-family: 'eicons';
+	src: url('../fonts/eicons.eot?#{$version}');
+	src: url('../fonts/eicons.eot?#{$version}#iefix') format('embedded-opentype'),
+	url('../fonts/eicons.woff2?#{$version}') format('woff2'),
+	url('../fonts/eicons.woff?#{$version}') format('woff'),
+	url('../fonts/eicons.ttf?#{$version}') format('truetype'),
+	url('../fonts/eicons.svg?#{$version}#eicon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="eicon"],
+[class*=" eicon-"] {
+	display: inline-block;
+	font-family: eicons;
+	font-size: inherit;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	line-height: 1;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes eicon-spin {
+  0% {
+	transform: rotate(0deg);
+  }
+  100% {
+	transform: rotate(359deg);
+  }
+}
+
+.eicon-animation-spin {
+  animation: eicon-spin 2s infinite linear;
+}
+
+@import "_icons";
