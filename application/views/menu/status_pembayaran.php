@@ -2,7 +2,7 @@
     <div class="row mt-3">
         <div class="col-md-6">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Data Mempelai
+                Status pembayaran
                 <strong>berhasil</strong>
                 <?= $this->session->flashdata('flash'); ?>.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -37,10 +37,13 @@
                             <td><?= date('d F Y', $l['tanggal']); ?></td>
                             <td><?= $l['status']; ?></td>
                             <td>
-                                <a href="<?= base_url(); ?>menu/edit_pembayaran/<?= $l['id']; ?>" class="btn btn-warning btn-circle">
+                                <a href="<?= base_url(); ?>Admin/user_akses/<?= $l['id']; ?>" class="btn btn-success btn-circle">
+                                    ACC
+                                </a>
+                                <a href="<?= base_url(); ?>Menu/edit_pembayaran/<?= $l['id']; ?>" class="btn btn-warning btn-circle">
                                     <i class="fas fa-exclamation-triangle"></i>
                                 </a>
-                                <a href="<?= base_url(); ?>menu/hapus_user/<?= $l['id']; ?>" class="btn btn-danger btn-circle" onclick="return confirm('Apa anda yakin?');">
+                                <a href="<?= base_url(); ?>Menu/hapus_user/<?= $l['id']; ?>" class="btn btn-danger btn-circle" onclick="return confirm('Apa anda yakin?');">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>

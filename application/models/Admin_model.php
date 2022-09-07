@@ -117,11 +117,11 @@ class Admin_model extends CI_model
     public function tambahDataTamu()
     {
         $data = [
-            "id_user" => $this->input->post('id_user', true),
+            "id_user" =>  $this->session->userdata('id_user', true),
             "nama" => $this->input->post('nama', true)
         ];
 
-        $this->db->insert('list_pernikahan', $data);
+        $this->db->insert('list_undangan', $data);
     }
 
     public function getGalleryByid($id)
@@ -187,9 +187,89 @@ class Admin_model extends CI_model
         $this->db->update('lok_ultah', $data);
     }
 
-    public function getAllListUndanganUltah()
+    public function getAllListUndanganUltah($id)
     {
-        return $this->db->get('list_undangan')->result_array();
+        return $this->db->get_where('list_undangan', ['id_user' => $id])->result_array();
+    }
+
+    public function getCoverUltahByid($id)
+    {
+        return $this->db->get_where('cover_ultah', ['id_user' => $id])->row_array();
+    }
+
+    public function editCoverUltah()
+    {
+        $data = [
+            "cover" => $this->input->post('cover', true)
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('cover_ultah', $data);
+    }
+
+    public function getAllGalleryUltah($id)
+    {
+        return $this->db->get_where('gallery', ['id_user' => $id])->row_array();
+    }
+
+    public function getGalleryUltahById($id)
+    {
+        return $this->db->get_where('gallery', ['id_user' => $id])->row_array();
+    }
+
+    public function editGalleryUltah()
+    {
+        $data = [
+            "nama" => $this->input->post('nama', true)
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('gallery', $data);
+    }
+
+    public function getMusikUltahById($id)
+    {
+        return $this->db->get_where('musik_pernikahan', ['id_user' => $id])->row_array();
+    }
+
+    public function editMusikUltah()
+    {
+        $data = [
+            "nama" => $this->input->post('nama', true)
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('musik_pernikahan', $data);
+    }
+
+    public function getHitungUltahById($id)
+    {
+        return $this->db->get_where('hitung_mundur', ['id_user' => $id])->row_array();
+    }
+
+    public function editHitungUltah()
+    {
+        $data = [
+            "tahun" => $this->input->post('tahun', true),
+            "bulan" => $this->input->post('bulan', true),
+            "hari" => $this->input->post('hari', true)
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('hitung_mundur', $data);
+    }
+
+    public function getAmplopUltahById($id)
+    {
+        return $this->db->get_where('hadiah', ['id_user' => $id])->row_array();
+    }
+
+    public function editAmplopUltah()
+    {
+        $data = [
+            "nama_bank" => $this->input->post('nama_bank', true),
+            "no_rek" => $this->input->post('no_rek', true),
+            "an" => $this->input->post('an', true),
+            "alamat" => $this->input->post('alamat', true)
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('hadiah', $data);
     }
     //menu ultah end
 }

@@ -12,26 +12,12 @@
                 <br>Gunakan menu Pengaturan untuk melihat link undangan, merubah informasi dasar, lokasi, tema dan lainnya.
             </p>
             <div class="my-2"></div>
-            <a href="<?= base_url('upernikahan'); ?>" class="btn btn-primary btn-icon-split col-lg-4">
+            <a href="<?= base_url('upernikahan'); ?>" class="btn btn-primary col-lg">
                 <span class="icon text-white-50">
                     <i class="fa-solid fa-children"></i>
                 </span>
                 <span class="text">Lihat Undangan Pernikahan</span>
             </a>
-            <!-- <div class="my-2"></div>
-            <a href="#" class="btn btn-success btn-icon-split col-lg-4">
-                <span class="icon text-white-50">
-                    <i class="fa-solid fa-cake-candles"></i>
-                </span>
-                <span class="text">Lihat Undangan Ulang Tahun</span>
-            </a>
-            <div class="my-2"></div>
-            <a href="#" class="btn btn-info btn-icon-split col-lg-4">
-                <span class="icon text-white-50">
-                    <i class="fa-solid fa-people-group"></i>
-                </span>
-                <span class="text">Lihat Undangan Halal Bi Halal</span>
-            </a> -->
         </div>
     </div>
 

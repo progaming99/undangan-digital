@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2022 at 01:08 PM
+-- Generation Time: Sep 07, 2022 at 09:04 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -39,7 +39,8 @@ CREATE TABLE `cover_pernikahan` (
 --
 
 INSERT INTO `cover_pernikahan` (`id`, `id_user`, `cover`, `image`) VALUES
-(13, 60, 'cover', 'Qiqi.png');
+(13, 60, 'cover', 'Qiqi.png'),
+(14, 61, 'cover', 'cover4.jpg');
 
 -- --------------------------------------------------------
 
@@ -53,6 +54,14 @@ CREATE TABLE `cover_ultah` (
   `cover` varchar(100) NOT NULL,
   `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cover_ultah`
+--
+
+INSERT INTO `cover_ultah` (`id`, `id_user`, `cover`, `image`) VALUES
+(1, 60, 'cover', 'mona.png'),
+(8, 61, 'cover', 'Qiqi.png');
 
 -- --------------------------------------------------------
 
@@ -76,7 +85,8 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`id`, `id_user`, `nama`, `image`, `image2`, `image3`, `image4`, `image5`) VALUES
-(3, 60, 'gallery', 'chongyun.png', 'xingqiu.png', 'amber.png', 'diona.png', 'bennett.png');
+(3, 66, 'gallery', 'bennett.png', 'diona1.png', 'yunjin.png', 'h_10000036.png', 'barbara.png'),
+(7, 61, 'gallery', 'chongyun1.png', 'xingqiu1.png', 'amber1.png', 'kaeya.png', 'diona1.png');
 
 -- --------------------------------------------------------
 
@@ -98,7 +108,8 @@ CREATE TABLE `hadiah` (
 --
 
 INSERT INTO `hadiah` (`id`, `id_user`, `nama_bank`, `no_rek`, `an`, `alamat`) VALUES
-(7, 60, 'Bank Jateng', '123456789', 'Ayaka', 'Jl. Inazuma liyue');
+(7, 60, 'Bank Jateng', '123456789', 'Ayaka', 'Jl. Inazuma liyue'),
+(8, 61, 'BRI', '34857023765875', 'ayaka 5', 'Inazuma');
 
 -- --------------------------------------------------------
 
@@ -150,7 +161,8 @@ CREATE TABLE `hitung_mundur` (
 --
 
 INSERT INTO `hitung_mundur` (`id`, `id_user`, `tahun`, `bulan`, `hari`) VALUES
-(9, 60, '2022', '8', '29');
+(9, 60, '2022', '8', '29'),
+(12, 61, '2022', '10', '2');
 
 -- --------------------------------------------------------
 
@@ -177,6 +189,18 @@ CREATE TABLE `list_undangan` (
   `no_hp` varchar(30) NOT NULL,
   `status` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `list_undangan`
+--
+
+INSERT INTO `list_undangan` (`id`, `id_user`, `nama`, `no_hp`, `status`) VALUES
+(42, 60, 'Qiqi ya', 'd', 0),
+(43, 61, 'Handika', '6281287735520', 0),
+(51, 43, 'asdasd', '2342', 0),
+(52, 11, 'Qiqi ya', '', 0),
+(55, 11, 'Ganyu', '', 0),
+(56, 11, 'Qiqi', '', 0);
 
 -- --------------------------------------------------------
 
@@ -209,7 +233,8 @@ CREATE TABLE `lok_mempelai` (
 --
 
 INSERT INTO `lok_mempelai` (`id`, `id_user`, `judul_acara`, `alamat_acara`, `nm_lokasi`, `tgl_pernikahan`, `w_mulai`, `w_selesai`, `z_waktu`, `sharelok`, `judul_acara2`, `alamat_acara2`, `nm_lokasi2`, `tgl_pernikahan2`, `w_mulai2`, `w_selesai2`, `z_waktu2`) VALUES
-(10, 60, 'Akah Nikah', 'Jalan liyue', 'Rumah zhongli', '2022-08-28', '07:46:00', '12:46', 'WIT', 'https://maps.google.com/maps?q=-6.7259222,110.7240021&z=17&hl=en', 'Resepsi', 'Jalan inazuma', 'Rumah tenrou commition', '2022-08-31', '09:47:00', '22:47', 'WIT');
+(10, 60, 'Akah Nikah', 'Jalan liyue', 'Rumah zhongli', '2022-08-28', '07:46:00', '12:46', 'WIT', 'https://maps.google.com/maps?q=-6.7259222,110.7240021&z=17&hl=en', 'Resepsi', 'Jalan inazuma', 'Rumah tenrou commition', '2022-08-31', '09:47:00', '22:47', 'WIT'),
+(11, 61, 'Akah Nikah', 'Jalan konoha blok 4 D', 'Rumah guru hiruka', '2022-09-07', '07:07:00', '13:07', 'WIT', 'https://maps.google.com/maps?q=-6.7259222,110.7240021&z=17&hl=en', 'Resepsi', 'Jl. Konoha blok G no 13', 'Rumah Hyuga', '2022-09-10', '07:07:00', '19:07', 'WIT');
 
 -- --------------------------------------------------------
 
@@ -230,6 +255,13 @@ CREATE TABLE `lok_ultah` (
   `sharelok` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `lok_ultah`
+--
+
+INSERT INTO `lok_ultah` (`id`, `id_user`, `judul_acara`, `alamat`, `nm_lokasi`, `tgl_acara`, `w_mulai`, `w_selesai`, `z_waktu`, `sharelok`) VALUES
+(18, 61, 'Ulangtahun', 'monstad', 'Rumah guru hiruka', '2022-08-30', '11:05:00', '14:06:00', 'WIB (Indonesia Barat)', 'sdsdad');
+
 -- --------------------------------------------------------
 
 --
@@ -248,7 +280,8 @@ CREATE TABLE `musik_pernikahan` (
 --
 
 INSERT INTO `musik_pernikahan` (`id`, `id_user`, `nama`, `musik`) VALUES
-(3, 60, 'Qiqi ya', 'Radwimps_-_Theme_of_Mitsuha.mp3');
+(3, 60, 'Qiqi ya', 'Radwimps_-_Theme_of_Mitsuha.mp3'),
+(4, 61, 'Musik', 'Aimer_-_残響散歌MUSIC_VIDEOテレビアニメ鬼滅の刃遊郭編オープニングテーマ.mp3');
 
 -- --------------------------------------------------------
 
@@ -278,7 +311,8 @@ CREATE TABLE `nm_mempelai` (
 --
 
 INSERT INTO `nm_mempelai` (`id`, `id_user`, `np_pria`, `nl_pria`, `na_pria`, `ni_pria`, `i_pria`, `np_wanita`, `nl_wanita`, `na_wanita`, `ni_wanita`, `i_wanita`, `image`, `image2`) VALUES
-(28, 60, 'sayu', 'sayu chan', 'zhongli', 'ningguang', '@sayu99', 'qiqi', 'qiqi the zombie', 'childe', 'ganyu', '@qiqi11', 'sayu.png', 'Qiqi.png');
+(28, 60, 'sayu', 'sayu chan', 'zhongli', 'ningguang', '@sayu99', 'qiqi', 'qiqi the zombie', 'childe', 'ganyu', '@qiqi11', 'sayu.png', 'Qiqi.png'),
+(29, 61, 'Naruto', 'Uzumaki Naruto', 'Minato', 'Khusina Uzumaki', '@narutolas67', 'Hinata', 'Hinata Hyuga', 'Hiashi Hyuga', 'Kushi', '@Hinata77', 'naruto.png', 'hinata.png');
 
 -- --------------------------------------------------------
 
@@ -293,10 +327,20 @@ CREATE TABLE `nm_ultah` (
   `nama_lengkap` varchar(50) NOT NULL,
   `nm_ayah` varchar(50) NOT NULL,
   `nm_ibu` varchar(50) NOT NULL,
+  `jenis_kelamin` varchar(50) NOT NULL,
+  `urutan` varchar(50) NOT NULL,
   `ultah_ke` int(11) NOT NULL,
   `uc_tambahan` text NOT NULL,
   `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nm_ultah`
+--
+
+INSERT INTO `nm_ultah` (`id`, `id_user`, `nama`, `nama_lengkap`, `nm_ayah`, `nm_ibu`, `jenis_kelamin`, `urutan`, `ultah_ke`, `uc_tambahan`, `image`) VALUES
+(31, 60, 'amber', 'amber lzzz', 'gaosj', 'aklsdm,', 'Putra', 'Kedua', 10, 'selamat ulang tahun untuk anak kita diona', 'amber.png'),
+(36, 61, 'Qiqi', 'Qiqi', 'ayah', 'ibu', 'Putri', 'Kedua', 1, 'semoga gak bakal dapat qiqi lagi!!!', 'chongyun.png');
 
 -- --------------------------------------------------------
 
@@ -312,6 +356,13 @@ CREATE TABLE `pembayaran` (
   `image` varchar(100) NOT NULL,
   `status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_user`, `nama_pengirim`, `tanggal`, `image`, `status`) VALUES
+(6, 61, 'Abid Khoirudin', '1661755714', 'ada-2047-juta-pengguna-internet-di-indonesia-awal-2022-by-katadata2.png', 'Lunas');
 
 -- --------------------------------------------------------
 
@@ -332,7 +383,9 @@ CREATE TABLE `quotes_pernikahan` (
 --
 
 INSERT INTO `quotes_pernikahan` (`id`, `id_user`, `nama`, `hadir_tidak`, `ucapan`) VALUES
-(19, 0, 'Qiqi', 'Hadir', 'hallo selamat');
+(1, 61, 'asd', 'asd', 'asd'),
+(19, 61, 'Qiqi', 'Hadir', 'hallo selamat'),
+(51, 45, 'asd', 'asd', 'asd');
 
 -- --------------------------------------------------------
 
@@ -342,10 +395,20 @@ INSERT INTO `quotes_pernikahan` (`id`, `id_user`, `nama`, `hadir_tidak`, `ucapan
 
 CREATE TABLE `quotes_ultah` (
   `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `hadir_tidak` varchar(50) NOT NULL,
   `ucapan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `quotes_ultah`
+--
+
+INSERT INTO `quotes_ultah` (`id`, `id_user`, `nama`, `hadir_tidak`, `ucapan`) VALUES
+(3, 61, 'Qiqi ya', 'Hadir', 'sdf'),
+(50, 65, 'qwe', 'qwe', 'qwe'),
+(51, 61, 'qwe', 'qwe', 'qwe');
 
 -- --------------------------------------------------------
 
@@ -359,6 +422,14 @@ CREATE TABLE `transfer` (
   `no_rek` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `transfer`
+--
+
+INSERT INTO `transfer` (`id`, `bank`, `no_rek`) VALUES
+(1, 'BRI', '23472894'),
+(2, 'Mandiri', '234146346234');
+
 -- --------------------------------------------------------
 
 --
@@ -370,6 +441,13 @@ CREATE TABLE `ulasan` (
   `id_user` int(11) NOT NULL,
   `ulasan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ulasan`
+--
+
+INSERT INTO `ulasan` (`id`, `id_user`, `ulasan`) VALUES
+(5, 61, 'ygy');
 
 -- --------------------------------------------------------
 
@@ -393,8 +471,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `email`, `image`, `password`, `role_id`, `is_active`, `created_at`) VALUES
-(11, 'Adeptus', 'progaming99.as48@gmail.com', 'ningguang1.png', '$2y$10$9Kl7MmTMVMzDKoiBfw3AjO33aJnfLeMgkZkwwTHcaWFPDtTB72qZy', 1, 1, 1657855641),
-(60, 'Sayu', 'gimpact20211@gmail.com', 'default.jpg', '$2y$10$VwIGjIJ.UzqzEfPyvovlKOnpVpMDVw5cG576A939EpfyWpb53y2HC', 2, 1, 1661586242);
+(11, 'Adeptus', 'progaming99.as48@gmail.com', 'Character_Xiao.png', '$2y$10$9Kl7MmTMVMzDKoiBfw3AjO33aJnfLeMgkZkwwTHcaWFPDtTB72qZy', 1, 1, 1657855641),
+(61, 'testing', 'gimpact20211@gmail.com', 'default.jpg', '$2y$10$WKvx9V5a8MbU3ZYR.f3wxehjKbmiQrVujBQ4p4uA9RroOFGs2RrUK', 2, 1, 1661742045);
 
 -- --------------------------------------------------------
 
@@ -405,6 +483,7 @@ INSERT INTO `user` (`id`, `nama`, `email`, `image`, `password`, `role_id`, `is_a
 CREATE TABLE `user_access_menu` (
   `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -412,35 +491,36 @@ CREATE TABLE `user_access_menu` (
 -- Dumping data for table `user_access_menu`
 --
 
-INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
-(1, 1, 1),
-(14, 1, 5),
-(18, 2, 6),
-(30, 2, 2),
-(47, 1, 8),
-(48, 2, 8),
-(49, 1, 10),
-(73, 1, 7),
-(76, 2, 7),
-(77, 2, 11),
-(78, 2, 10),
-(80, 1, 6),
-(81, 1, 12),
-(82, 1, 3),
-(83, 1, 11),
-(84, 2, 12),
-(86, 2, 14),
-(87, 2, 15),
-(88, 2, 16),
-(89, 2, 17),
-(90, 1, 2),
-(91, 1, 14),
-(92, 2, 18),
-(93, 1, 21),
-(94, 1, 15),
-(95, 1, 17),
-(96, 2, 23),
-(97, 2, 19);
+INSERT INTO `user_access_menu` (`id`, `role_id`, `user_id`, `menu_id`) VALUES
+(1, 1, 11, 1),
+(14, 1, 11, 5),
+(18, 2, 61, 6),
+(47, 1, 11, 8),
+(48, 2, 61, 8),
+(49, 1, 11, 10),
+(73, 1, 11, 7),
+(76, 2, 61, 7),
+(77, 2, 61, 11),
+(78, 2, 61, 10),
+(80, 1, 11, 6),
+(81, 1, 11, 12),
+(82, 1, 11, 3),
+(83, 1, 11, 11),
+(84, 2, 61, 12),
+(86, 2, 61, 14),
+(87, 2, 61, 15),
+(88, 2, 61, 16),
+(89, 2, 61, 17),
+(90, 1, 11, 2),
+(91, 1, 11, 14),
+(92, 2, 11, 18),
+(93, 1, 11, 21),
+(94, 1, 11, 15),
+(95, 1, 11, 17),
+(96, 2, 61, 23),
+(97, 2, 61, 19),
+(106, 2, 0, 2),
+(107, 61, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -529,7 +609,10 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (51, 7, 'List Undangan', 'pernikahan/list_undangan', 'fas fa-paint-roller', 1),
 (52, 21, 'profile', 'user_admin', 'fa-solid fa-address-card', 1),
 (53, 3, 'Status Pembayaran', 'menu/status_pembayaran', 'fa-solid fa-money-bills', 1),
-(54, 14, 'Daftar Mempelai', 'admin/daftar_mempelai', 'fa-solid fa-folder-tree', 1);
+(54, 14, 'Daftar Mempelai', 'admin/daftar_mempelai', 'fa-solid fa-folder-tree', 1),
+(55, 15, 'Daftar User', 'admin/daftar_ultah', 'fa-solid fa-address-card', 1),
+(56, 17, 'Daftar User', 'admin/daftar_lainnya', 'fa-solid fa-address-card', 1),
+(57, 24, 'f', 'f', 'f', 1);
 
 -- --------------------------------------------------------
 
@@ -618,7 +701,9 @@ INSERT INTO `visitor` (`ip`, `date`, `hits`, `online`, `time`) VALUES
 ('::1', '2022-08-15', 1, '1660546863', '2022-08-15 09:01:03'),
 ('::1', '2022-08-16', 1, '1660646092', '2022-08-16 12:34:52'),
 ('::1', '2022-08-23', 3, '1661223449', '2022-08-23 04:30:57'),
-('::1', '2022-08-25', 1, '1661431468', '2022-08-25 14:44:28');
+('::1', '2022-08-25', 1, '1661431468', '2022-08-25 14:44:28'),
+('::1', '2022-09-05', 17, '1662379142', '2022-09-05 05:51:26'),
+('::1', '2022-09-06', 40, '1662443148', '2022-09-06 04:13:57');
 
 --
 -- Indexes for dumped tables
@@ -776,25 +861,25 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT for table `cover_pernikahan`
 --
 ALTER TABLE `cover_pernikahan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `cover_ultah`
 --
 ALTER TABLE `cover_ultah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `hadiah`
 --
 ALTER TABLE `hadiah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `harga`
@@ -806,7 +891,7 @@ ALTER TABLE `harga`
 -- AUTO_INCREMENT for table `hitung_mundur`
 --
 ALTER TABLE `hitung_mundur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `list_pernikahan`
@@ -818,85 +903,85 @@ ALTER TABLE `list_pernikahan`
 -- AUTO_INCREMENT for table `list_undangan`
 --
 ALTER TABLE `list_undangan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `lok_mempelai`
 --
 ALTER TABLE `lok_mempelai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `lok_ultah`
 --
 ALTER TABLE `lok_ultah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `musik_pernikahan`
 --
 ALTER TABLE `musik_pernikahan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `nm_mempelai`
 --
 ALTER TABLE `nm_mempelai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `nm_ultah`
 --
 ALTER TABLE `nm_ultah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `quotes_pernikahan`
 --
 ALTER TABLE `quotes_pernikahan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `quotes_ultah`
 --
 ALTER TABLE `quotes_ultah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `transfer`
 --
 ALTER TABLE `transfer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ulasan`
 --
 ALTER TABLE `ulasan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -908,13 +993,13 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `user_token`
 --
 ALTER TABLE `user_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

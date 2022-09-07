@@ -14,12 +14,12 @@
             </p>
 
             <div class="my-2 col-9 mx-auto">
-                <a href="<?= base_url('pernikahan/info_pernikahan'); ?>" class="btn btn-primary btn-icon-split">
+                <a href="<?= base_url('Pernikahan/info_pernikahan'); ?>" class="btn btn-primary btn-icon-split">
                     <span class="text"><i class="fa-solid fa-children"></i> Undangan Pernikahan</span>
                 </a>
             </div>
             <div class="my-2 col-9 mx-auto">
-                <a href="<?= base_url('ulangtahun/info_ultah'); ?>" class="btn btn-success btn-icon-split">
+                <a href="<?= base_url('UlangTahun/info_ultah'); ?>" class="btn btn-success btn-icon-split">
                     <span class="text"><i class="fas fa-cake-candles"></i> Undangan Ulang Tahun</span>
                 </a>
             </div>

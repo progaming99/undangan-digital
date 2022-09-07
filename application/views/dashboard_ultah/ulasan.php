@@ -4,7 +4,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Kirim Ulasan</h6>
     </div>
     <div class="card-body">
-        <form class="user" action="<?= base_url('dashboard/kirim_masukan'); ?>" method="POST" enctype="multipart/form-data">
+        <form class="user" action="<?= base_url('dashboardultah/ulasan'); ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Tulis Sesuatu..." value="<?= $user['nama']; ?>">
                 <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>

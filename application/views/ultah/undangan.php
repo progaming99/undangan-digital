@@ -1071,22 +1071,10 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="elementor-element elementor-element-1f74baf6 wdp-sticky-section-no elementor-widget elementor-widget-image" data-id="1f74baf6" data-element_type="widget" data-widget_type="image.default">
-                                                                    <div class="elementor-widget-container">
-                                                                        <div class="elementor-image">
-                                                                            <img width="800" height="800" src="https://wekita.id/wp-content/uploads/2021/07/bismillah.svg" class="attachment-large size-large" alt="" loading="lazy" srcset="https://wekita.id/wp-content/uploads//2021/07/bismillah.svg 150w, https://wekita.id/wp-content/uploads//2021/07/bismillah.svg 300w, https://wekita.id/wp-content/uploads//2021/07/bismillah.svg 1024w" sizes="(max-width: 800px) 100vw, 800px" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="elementor-element elementor-element-36bfdeba wdp-sticky-section-no elementor-widget elementor-widget-heading" data-id="36bfdeba" data-element_type="widget" id="mempelai" data-widget_type="heading.default">
-                                                                    <div class="elementor-widget-container">
-                                                                        <h2 class="elementor-heading-title elementor-size-default">Assalamu'alaikum Wr. Wb.</h2>
-                                                                    </div>
-                                                                </div>
                                                                 <div class="elementor-element elementor-element-2f00441e wdp-sticky-section-no elementor-widget elementor-widget-text-editor" data-id="2f00441e" data-element_type="widget" data-widget_type="text-editor.default">
                                                                     <div class="elementor-widget-container">
                                                                         <div class="elementor-text-editor elementor-clearfix">
-                                                                            <p>Tanpa mengurangi rasa hormat. saya mengundang Bapak/Ibu/Saudara/i serta kerabat sekalian untuk menghadiri acara Ulang Tahun saya:</p>
+                                                                            <p>Saya mengundang teman - teman serta kerabat sekalian untuk menghadiri acara Ulang Tahun saya:</p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1105,7 +1093,7 @@
                                                                 <div class="elementor-element elementor-element-69811a6c wdp-sticky-section-no elementor-widget elementor-widget-text-editor" data-id="69811a6c" data-element_type="widget" data-widget_type="text-editor.default">
                                                                     <div class="elementor-widget-container">
                                                                         <div class="elementor-text-editor elementor-clearfix">
-                                                                            Putra Pertama dari
+                                                                            <?= $nama['jenis_kelamin']; ?> <?= $nama['urutan']; ?> dari
                                                                             <br>
                                                                             Bapak <?= $nama['nm_ayah']; ?>
                                                                             <br>
@@ -1744,7 +1732,7 @@
                                         </div>
                                         <div class="elementor-element elementor-element-2668fd99 wdp-sticky-section-no elementor-widget elementor-widget-heading" data-id="2668fd99" data-element_type="widget" data-widget_type="heading.default">
                                             <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Wassalamu'alaikum Wr. Wb.</h2>
+                                                <h2 class="elementor-heading-title elementor-size-default">Terimakasih</h2>
                                             </div>
                                         </div>
                                         <div class="elementor-element elementor-element-3d0da19e wdp-sticky-section-no elementor-widget elementor-widget-text-editor" data-id="3d0da19e" data-element_type="widget" data-widget_type="text-editor.default">

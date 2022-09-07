@@ -32,8 +32,8 @@
                                                     <td><?= $l['no_hp']; ?></td>
                                                     <td><?= $l['status'] == 0 ? "<span class='badge badge-warning'>Belum Diundang</span>" : "<span class='badge badge-success'>Sudah Diundang</span>"; ?></td>
                                                     <td>
-                                                        <a href="<?= base_url(); ?>ulangtahun/edit_tamu/<?= $l['id']; ?>" class="badge rounded-pill bg-warning">Edit</a>
-                                                        <a href="<?= base_url(); ?>ulangtahun/hapus_tamu/<?= $l['id']; ?>" class="badge rounded-pill bg-danger" onclick="return confirm('Apa anda yakin?');">Hapus</a>
+                                                        <a href="<?= base_url(); ?>UlangTahun/edit_tamu/<?= $l['id']; ?>" class="badge rounded-pill bg-warning">Edit</a>
+                                                        <a href="<?= base_url(); ?>UlangTahun/hapus_tamu/<?= $l['id']; ?>" class="badge rounded-pill bg-danger" onclick="return confirm('Apa anda yakin?');">Hapus</a>
                                                     </td>
                                                     <td><button type="button" onclick="sendWa(<?= $l['id'] ?>,<?= $l['no_hp'] ?>, '<?= $l['nama'] ?>')" class="btn btn-success">Success</button></td>
                                                 </tr>
@@ -47,7 +47,7 @@
                                         Daftar Tamu Masih Kosong!
                                     </div>
                                 <?php endif; ?>
-                                <form class="user" action="<?= base_url('ulangtahun/tambah_list'); ?>" method="POST" enctype="multipart/form-data">
+                                <form class="user" action="<?= base_url('UlangTahun/tambah_list'); ?>" method="POST" enctype="multipart/form-data">
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <h6 class="m-0 font-weight-bold text-primary">Tambah Tamu</h6>

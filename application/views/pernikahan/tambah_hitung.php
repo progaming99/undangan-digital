@@ -15,17 +15,17 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <div class="small mb-1 ml-3">Tahun</div>
-                                                <input type="number" class="form-control form-control-user" id="tahun" name="tahun" placeholder="2022" value="<?= set_value('tahun'); ?>">
+                                                <input type="number" class="form-control form-control-user" id="tahun" name="tahun" placeholder="2022" value="<?= set_value('tahun'); ?><?= $hitung['tahun']; ?>">
                                                 <?= form_error('tahun', '<small class="text-danger pl-3">', '</small>'); ?>
                                             </div>
                                             <div class="form-group">
                                                 <div class="small mb-1 ml-3">Bulan</div>
-                                                <input type="number" class="form-control form-control-user" id="bulan" name="bulan" placeholder="05" value="<?= set_value('bulan'); ?>">
+                                                <input type="number" class="form-control form-control-user" id="bulan" name="bulan" placeholder="05" value="<?= set_value('bulan'); ?><?= $hitung['bulan']; ?>">
                                                 <?= form_error('bulan', '<small class="text-danger pl-3">', '</small>'); ?>
                                             </div>
                                             <div class="form-group">
                                                 <div class="small mb-1 ml-3">Tanggal</div>
-                                                <input type="number" class="form-control form-control-user" id="hari" name="hari" placeholder="30" value="<?= set_value('hari'); ?>">
+                                                <input type="number" class="form-control form-control-user" id="hari" name="hari" placeholder="30" value="<?= set_value('hari'); ?><?= $hitung['hari']; ?>">
                                                 <?= form_error('hari', '<small class="text-danger pl-3">', '</small>'); ?>
                                             </div>
                                         </div>

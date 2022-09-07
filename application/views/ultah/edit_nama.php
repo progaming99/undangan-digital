@@ -28,14 +28,38 @@
                                         <h6>Pilih Foto</h6>
                                     </div>
                                     <div class="form-group">
-                                        <div class="small mb-1 ml-3">Nama</div>
-                                        <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama" value="<?= $nama['nama']; ?>">
+                                        <div class="small mb-1 ml-3">Nama Panggilan</div>
+                                        <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama Panggilan" value="<?= $nama['nama']; ?>">
                                         <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
                                         <div class="small mb-1 ml-3">Nama Lengkap</div>
-                                        <input type="text" class="form-control form-control-user" id="nama_lengkap" name="nama_lengkap" placeholder="Ulang Tahun Ke.." value="<?= $nama['nama_lengkap']; ?>">
+                                        <input type="text" class="form-control form-control-user" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap" value="<?= $nama['nama_lengkap']; ?>">
                                         <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="small mb-1 ml-3">Nama Ayah</div>
+                                        <input type="text" class="form-control form-control-user" id="nm_ayah" name="nm_ayah" placeholder="Nama Ayah" value="<?= $nama['nm_ayah']; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="small mb-1 ml-3">Nama Ibu</div>
+                                        <input type="text" class="form-control form-control-user" id="nm_ibu" name="nm_ibu" placeholder="Nama Ibu" value="<?= $nama['nm_ibu']; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="small mb-1 ml-3">Jenis Kelamin</div>
+                                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+                                            <?php foreach ($jenkel as $j) : ?>
+                                                <?php if ($j == $nama['jenkel']) : ?>
+                                                    <option value="<?= $j; ?>" selected><?= $j; ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $j ?>"><?= $j; ?></option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="small mb-1 ml-3">Urutan Anak</div>
+                                        <input type="text" class="form-control form-control-user" id="urutan" name="urutan" placeholder="Anak Ke Berapa?" value="<?= $nama['urutan']; ?>">
                                     </div>
                                     <div class="form-group">
                                         <div class="small mb-1 ml-3">Ulang Tahun</div>
@@ -44,9 +68,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="small mb-1 ml-3">Ucapan Tambahan</div>
-                                        <input type="text" class="form-control form-control-user" name="uc_tambahan" placeholder="Ucapan Tambahan" value="<?= $nama['uc_tambahan']; ?>">
+                                        <input type="text" class="form-control form-control-user" id="uc_tambahan" name="uc_tambahan" placeholder="Ucapan Tambahan" value="<?= $nama['uc_tambahan']; ?>">
                                     </div>
-
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Simpan
                                     </button>

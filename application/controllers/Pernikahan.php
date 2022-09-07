@@ -23,6 +23,12 @@ class Pernikahan extends CI_Controller
 
     public function info_pernikahan()
     {
+        $cekUser = $this->db->get_where('nm_mempelai', ['id_user' => $this->session->userdata('id_user')])->num_rows();
+
+        if ($cekUser > 0) {
+            redirect('Dashboard/akhir');
+        }
+
         $data['title'] = 'Informasi Pernikahan';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['nama'] = $this->db->get_where('nm_mempelai', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -65,21 +71,13 @@ class Pernikahan extends CI_Controller
                 $config['upload_path']          = './assets/images/pernikahan';
 
                 $this->load->library('upload', $config);
-
-                // hapus gambar user lama
                 if ($this->upload->do_upload('image')) {
-                    $gambar_lama = $data['user']['image'];
-                    if ($gambar_lama != 'pria.png') {
-                        unlink(FCPATH . 'assets/images/pernikahan/' . $gambar_lama);
-                    }
-
-                    // upload gambar user baru
                     $gambar_baru = $this->upload->data('file_name');
                     $this->db->set('image', $gambar_baru);
                 } else {
                     $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                     Gambar anda belum ditambahkan </div>');
-                    redirect('pernikahan/info_pernikahan');
+                    redirect('Pernikahan/info_pernikahan');
 
                     echo $this->upload->display_errors();
                 }
@@ -95,7 +93,7 @@ class Pernikahan extends CI_Controller
             }
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, data mempelai pria berhasil tersimpan! </div>');
-            redirect('pernikahan/nm_mempelai_wanita');
+            redirect('Pernikahan/nm_mempelai_wanita');
         }
     }
 
@@ -143,21 +141,10 @@ class Pernikahan extends CI_Controller
                 $config['upload_path']          = './assets/images/pernikahan';
 
                 $this->load->library('upload', $config);
-
                 if ($this->upload->do_upload('image2')) {
-                    // hapus gambar user lama
-                    $gambar_lama = $data['nm_mempelai']['image2'];
-                    if ($gambar_lama != 'wanita.png') {
-                        unlink(FCPATH . 'assets/images/pernikahan/' . $gambar_lama);
-                    }
-
                     // upload gambar user baru
                     $gambar_baru = $this->upload->data('file_name');
                     $this->db->set('image2', $gambar_baru);
-
-                    // $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                    // Gambar anda belum ditambahkan </div>');
-                    // redirect('pernikahan/nm_mempelai_wanita');
                 } else {
                     echo $this->upload->display_errors();
                 }
@@ -173,7 +160,7 @@ class Pernikahan extends CI_Controller
             }
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, data mempelai wanita berhasil tersimpan! </div>');
-            redirect('pernikahan/info_lokasi');
+            redirect('Pernikahan/info_lokasi');
         }
     }
 
@@ -244,17 +231,10 @@ class Pernikahan extends CI_Controller
                 'w_selesai2'     => $w_selesai2,
                 'z_waktu2'       => $z_waktu2
             ];
-            $check = $this->db->get_where('lok_mempelai', ['id_user' => $id_user])->row();
-
-            if ($check->id_user == $id_user) {
-                $this->db->where('id_user',  $id_user);
-                $this->db->update('lok_mempelai', $data);
-            } else {
-                $this->db->insert('lok_mempelai', $data);
-            }
+            $this->db->insert('lok_mempelai', $data);
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Info lokasi mempelai berhasil tersimpan!</div>');
-            redirect('pernikahan/cover_pernikahan');
+            redirect('Pernikahan/cover_pernikahan');
         }
     }
 
@@ -292,12 +272,6 @@ class Pernikahan extends CI_Controller
                 $this->load->library('upload', $config);
 
                 if ($this->upload->do_upload('image')) {
-                    // hapus gambar user lama
-                    $gambar_lama = $data['cover']['image'];
-                    if ($gambar_lama != 'pria.png') {
-                        unlink(FCPATH . 'assets/images/pernikahan/cover_pernikahan/' . $gambar_lama);
-                    }
-
                     // upload gambar user baru
                     $gambar_baru = $this->upload->data('file_name');
                     $this->db->set('image', $gambar_baru);
@@ -320,7 +294,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, Data anda berhasil diubah! </div>');
-            redirect('dashboard/akhir');
+            redirect('Dashboard/akhir');
         }
     }
 
@@ -405,7 +379,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
     Data Mempelai Pria Berhasil Di Ubah! </div>');
-            redirect('pernikahan/pengaturan');
+            redirect('Pernikahan/pengaturan');
         }
     }
 
@@ -472,7 +446,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
     Data Mempelai Wanita Berhasil Di Ubah! </div>');
-            redirect('pernikahan/pengaturan');
+            redirect('Pernikahan/pengaturan');
         }
     }
 
@@ -511,7 +485,7 @@ class Pernikahan extends CI_Controller
             $this->Pernikahan_model->editDataLokasi();
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
     Data Lokasi Pernikahan Berhasil Di Edit! </div>');
-            redirect('pernikahan/pengaturan');
+            redirect('Pernikahan/pengaturan');
         }
     }
 
@@ -555,7 +529,7 @@ class Pernikahan extends CI_Controller
             $this->Pernikahan_model->tambahDataListUndangan();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Data Kamu Berhasil Disimpan!</div>');
-            redirect('pernikahan/list_undangan');
+            redirect('Pernikahan/list_undangan');
         }
     }
 
@@ -565,7 +539,7 @@ class Pernikahan extends CI_Controller
 
         $this->Pernikahan_model->hapusDataPernikahan($id);
         $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('pernikahan/list_undangan');
+        redirect('Pernikahan/list_undangan');
     }
 
     public function edit_list_undangan($id)
@@ -588,7 +562,7 @@ class Pernikahan extends CI_Controller
             $this->Pernikahan_model->editDataList($id);
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
     Data Tamu Berhasil Di Ubah! </div>');
-            redirect('pernikahan/list_undangan');
+            redirect('Pernikahan/list_undangan');
         }
     }
 
@@ -643,7 +617,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, cover mempelai berhasil di edit! </div>');
-            redirect('pernikahan/pengaturan');
+            redirect('Pernikahan/pengaturan');
         }
     }
 
@@ -722,7 +696,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, gambar 1 berhasil diperbarui! </div>');
-            redirect('pernikahan/gallery_mempelai');
+            redirect('Pernikahan/gallery_mempelai');
         }
     }
     public function tambah_gallery2()
@@ -787,7 +761,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, gambar 2 berhasil diperbarui! </div>');
-            redirect('pernikahan/gallery_mempelai');
+            redirect('Pernikahan/gallery_mempelai');
         }
     }
     public function tambah_gallery3()
@@ -852,7 +826,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, gambar 3 berhasil diperbarui! </div>');
-            redirect('pernikahan/gallery_mempelai');
+            redirect('Pernikahan/gallery_mempelai');
         }
     }
     public function tambah_gallery4()
@@ -917,7 +891,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, gambar 4 berhasil diperbarui! </div>');
-            redirect('pernikahan/gallery_mempelai');
+            redirect('Pernikahan/gallery_mempelai');
         }
     }
     public function tambah_gallery5()
@@ -982,7 +956,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, gambar 5 berhasil diperbarui! </div>');
-            redirect('pernikahan/gallery_mempelai');
+            redirect('Pernikahan/gallery_mempelai');
         }
     }
 
@@ -991,6 +965,7 @@ class Pernikahan extends CI_Controller
         $data['title'] = 'Tambah Musik';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['musik_data'] = $this->db->get_where('musik_pernikahan', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        error_reporting(0);
 
         $this->form_validation->set_rules('nama', 'Full Nama', 'required|trim');
 
@@ -1048,7 +1023,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, musik anda berhasil ditambahkan! </div>');
-            redirect('pernikahan/pengaturan');
+            redirect('Pernikahan/pengaturan');
         }
     }
 
@@ -1056,6 +1031,8 @@ class Pernikahan extends CI_Controller
     {
         $data['title'] = 'Tambah Hitung Mundur';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['hitung'] = $this->db->get_where('hitung_mundur', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        error_reporting(0);
 
         $this->load->model('Pernikahan_model');
 
@@ -1074,7 +1051,7 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, hitung mundur berhasil ditambahkan! </div>');
-            redirect('pernikahan/pengaturan');
+            redirect('Pernikahan/pengaturan');
         }
     }
 
@@ -1082,6 +1059,8 @@ class Pernikahan extends CI_Controller
     {
         $data['title'] = 'Tambah Amplop';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['amplop'] = $this->db->get_where('hadiah', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        error_reporting(0);
 
         $this->load->model('Pernikahan_model');
 
@@ -1100,7 +1079,22 @@ class Pernikahan extends CI_Controller
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
             Selamat, amplop anda berhasil ditambahkan! </div>');
-            redirect('pernikahan/pengaturan');
+            redirect('Pernikahan/pengaturan');
         }
+    }
+
+    public function desain()
+    {
+        $data['title'] = 'Desain Undangan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->db->get_where('gallery', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $data['desain'] = $this->db->get_where('desain_user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_akhir', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('pernikahan/desain', $data);
+        $this->load->view('templates/footer');
     }
 }

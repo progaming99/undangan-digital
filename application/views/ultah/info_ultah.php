@@ -26,22 +26,46 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="small mb-1 ml-3">Nama Panggilan</div>
-                                        <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama Panggilan" value="">
+                                        <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama Panggilan" value="<?= $ultah['nama']; ?>">
                                         <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
                                         <div class="small mb-1 ml-3">Nama Lengkap</div>
-                                        <input type="text" class="form-control form-control-user" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap" value="">
+                                        <input type="text" class="form-control form-control-user" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap" value="<?= $ultah['nama_lengkap']; ?>">
                                         <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
+                                        <div class="small mb-1 ml-3">Nama Ayah</div>
+                                        <input type="text" class="form-control form-control-user" id="nm_ayah" name="nm_ayah" placeholder="Nama Ayah" value="<?= $ultah['nm_ayah']; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="small mb-1 ml-3">Nama Ibu</div>
+                                        <input type="text" class="form-control form-control-user" id="nm_ibu" name="nm_ibu" placeholder="Nama Ibu" value="<?= $ultah['nm_ibu']; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="small mb-1 ml-3">Jenis Kelamin</div>
+                                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+                                            <?php foreach ($jenkel as $j) : ?>
+                                                <?php if ($j == $ultah['jenkel']) : ?>
+                                                    <option value="<?= $j; ?>" selected><?= $j; ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $j ?>"><?= $j; ?></option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="small mb-1 ml-3">Urutan Anak</div>
+                                        <input type="text" class="form-control form-control-user" id="urutan" name="urutan" placeholder="Anak Ke Berapa?" value="<?= $ultah['urutan']; ?>">
+                                    </div>
+                                    <div class="form-group">
                                         <div class="small mb-1 ml-3">Ulang Tahun</div>
-                                        <input type="text" class="form-control form-control-user" id="ultah_ke" name="ultah_ke" placeholder="Ulang Tahun Ke Berapa?" value="">
+                                        <input type="text" class="form-control form-control-user" id="ultah_ke" name="ultah_ke" placeholder="Ulang Tahun Ke Berapa?" value="<?= $ultah['ultah_ke']; ?>">
                                         <?= form_error('ultah_ke', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
                                         <div class="small mb-1 ml-3">Ucapan Tambahan</div>
-                                        <input type="text" class="form-control form-control-user" id="uc_tambahan" name="uc_tambahan" placeholder="Ucapan Tambahan" value="">
+                                        <input type="text" class="form-control form-control-user" id="uc_tambahan" name="uc_tambahan" placeholder="Ucapan Tambahan" value="<?= $ultah['uc_tambahan']; ?>">
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Simpan

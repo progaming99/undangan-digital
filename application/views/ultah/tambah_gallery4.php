@@ -30,7 +30,7 @@
                                         </div>
                                         Extensi File JPG, PNG, Ukuran Maksimal File 2MB
                                     </div>
-                                    <button type="submit" class="btn btn-success btn-icon-split">
+                                    <button type="submit" class="btn btn-success col-lg">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-check"></i>
                                         </span>

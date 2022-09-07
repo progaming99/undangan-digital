@@ -1,23 +1,21 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-7">
-            <h4>Pilih Cover</h4>
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card o-hidden border-0 shadow-lg my-0">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg">
-                            <?= $this->session->flashdata('pesan'); ?>
                             <div class="p-1">
-                                <div class="col-lg mb-4">
-                                    <!-- Illustrations -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-1">
-                                            <h6 class="m-0 font-weight-bold text-primary">Informasi</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>Disarankan untuk melakukan kompresi pada foto yang akan diunggah, ukuran maksimal per file foto adalah 2MB</p>
-                                        </div>
+                                <?= $this->session->flashdata('pesan'); ?>
+                                <!-- Illustrations -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-1">
+                                        <h6 class="m-0 font-weight-bold text-primary">Upload Cover</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="m-0 font-weight-bold text-primary">Informasi</h6>
+                                        <p>Disarankan untuk melakukan kompresi pada foto yang akan diunggah, ukuran maksimal per file foto adalah 2MB</p>
                                     </div>
                                 </div>
                                 <form method="POST" action="<?= base_url('ulangtahun/tambah_cover'); ?>" enctype="multipart/form-data">
@@ -31,7 +29,7 @@
                                         </div>
                                         Extensi File JPG, PNG, Ukuran Maksimal File 2MB
                                     </div>
-                                    <button type="submit" class="btn btn-success btn-icon-split">
+                                    <button type="submit" class="btn btn-success col-lg">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-check"></i>
                                         </span>

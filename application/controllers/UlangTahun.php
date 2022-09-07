@@ -14,12 +14,14 @@ class UlangTahun extends CI_Controller
         $cekUser = $this->db->get_where('nm_ultah', ['id_user' => $this->session->userdata('id_user')])->num_rows();
 
         if ($cekUser > 0) {
-            redirect('dashboardultah/akhir');
+            redirect('DashboardUltah/akhir');
         }
 
         $data['title'] = 'Informasi Ulang Tahun';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['ultah'] = $this->db->get_where('nm_ultah', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['jenkel'] = ['Putra', 'Putri'];
+        error_reporting(0);
 
         $this->form_validation->set_rules('nama', 'Nama Panggilan', 'required|trim');
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
@@ -35,15 +37,23 @@ class UlangTahun extends CI_Controller
             $id_user      = $this->session->userdata('id_user', true);
             $nama         = $this->input->post('nama', true);
             $nama_lengkap = $this->input->post('nama_lengkap', true);
+            $nm_ayah = $this->input->post('nm_ayah', true);
+            $nm_ibu = $this->input->post('nm_ibu', true);
+            $jenis_kelamin = $this->input->post('jenis_kelamin', true);
+            $urutan = $this->input->post('urutan', true);
             $ultah_ke     = $this->input->post('ultah_ke', true);
             $uc_tambahan  = $this->input->post('uc_tambahan', true);
 
             $data = [
-                'id_user'      => $id_user,
-                'nama'         => $nama,
-                'nama_lengkap' => $nama_lengkap,
-                'ultah_ke'     => $ultah_ke,
-                'uc_tambahan'  => $uc_tambahan
+                'id_user'       => $id_user,
+                'nama'          => $nama,
+                'nama_lengkap'  => $nama_lengkap,
+                'nm_ayah'       => $nm_ayah,
+                'nm_ibu'        => $nm_ibu,
+                'jenis_kelamin' => $jenis_kelamin,
+                'urutan'        => $urutan,
+                'ultah_ke'      => $ultah_ke,
+                'uc_tambahan'   => $uc_tambahan
             ];
 
             //cek jika ada gambar yang akan diupload
@@ -57,19 +67,13 @@ class UlangTahun extends CI_Controller
                 $this->load->library('upload', $config);
 
                 if ($this->upload->do_upload('image')) {
-                    // hapus gambar user lama
-                    $gambar_lama = $data['nama']['image'];
-                    if ($gambar_lama != 'pria.png') {
-                        unlink(FCPATH . 'assets/images/ultah/' . $gambar_lama);
-                    }
-
                     // upload gambar user baru
                     $gambar_baru = $this->upload->data('file_name');
                     $this->db->set('image', $gambar_baru);
                 } else {
                     $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
                 Gambar anda belum ditambahkan </div>');
-                    redirect('ulangtahun/info_ultah');
+                    redirect('UlangTahun/info_ultah');
 
                     echo $this->upload->display_errors();
                 }
@@ -77,14 +81,15 @@ class UlangTahun extends CI_Controller
             $check = $this->db->get_where('nm_ultah', ['id_user' => $id_user])->row();
 
             if ($check->id_user == $id_user) {
+                $this->db->set('id_user', $id_user);
                 $this->db->where('id_user',  $id_user);
                 $this->db->update('nm_ultah', $data);
             } else {
                 $this->db->insert('nm_ultah', $data);
             }
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-                Data Kamu Berhasil Disimpan!</div>');
-            redirect('ulangtahun/info_lokasi');
+            Selamat, data kamu berhasil ditambahkan!</div>');
+            redirect('UlangTahun/info_lokasi');
         }
     }
 
@@ -93,6 +98,8 @@ class UlangTahun extends CI_Controller
     {
         $data['title'] = 'Informasi Lokasi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['lokasi'] = $this->db->get_where('lok_ultah', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['zona'] = ['WIB', 'WIT', 'WITA'];
 
         $this->form_validation->set_rules('judul_acara', 'Nama', 'required|trim');
         $this->form_validation->set_rules('alamat', 'Nama', 'required|trim');
@@ -110,20 +117,39 @@ class UlangTahun extends CI_Controller
             $this->load->view('ultah/info_lokasi', $data);
             $this->load->view('templates/footer');
         } else {
+            $id_user     = $this->session->userdata('id_user', true);
+            $judul_acara = $this->input->post('judul_acara', true);
+            $alamat      = $this->input->post('alamat', true);
+            $nm_lokasi   = $this->input->post('nm_lokasi', true);
+            $tgl_acara   = $this->input->post('tgl_acara', true);
+            $w_mulai     = $this->input->post('w_mulai', true);
+            $w_selesai   = $this->input->post('w_selesai', true);
+            $z_waktu     = $this->input->post('z_waktu', true);
+            $sharelok    = $this->input->post('sharelok', true);
+
             $data = [
-                'judul_acara' => $this->input->post('judul_acara'),
-                'alamat' => $this->input->post('alamat'),
-                'nm_lokasi' => $this->input->post('nm_lokasi'),
-                'tgl_acara' => $this->input->post('tgl_acara'),
-                'w_mulai' => $this->input->post('w_mulai'),
-                'w_selesai' => $this->input->post('w_selesai'),
-                'z_waktu' => $this->input->post('z_waktu'),
-                'sharelok' => $this->input->post('sharelok')
+                'id_user'     => $id_user,
+                'judul_acara' => $judul_acara,
+                'alamat'      => $alamat,
+                'nm_lokasi'   => $nm_lokasi,
+                'tgl_acara'   => $tgl_acara,
+                'w_mulai'     => $w_mulai,
+                'w_selesai'   => $w_selesai,
+                'z_waktu'     => $z_waktu,
+                'sharelok'    => $sharelok
             ];
-            $this->db->insert('lok_ultah', $data);
+            $check = $this->db->get_where('lok_ultah', ['id_user' => $id_user])->row();
+
+            if ($check->id_user == $id_user) {
+                $this->db->set('id_user', $id_user);
+                $this->db->where('id_user',  $id_user);
+                $this->db->update('lok_ultah', $data);
+            } else {
+                $this->db->insert('lok_ultah', $data);
+            }
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-            Data Kamu Berhasil Disimpan!</div>');
-            redirect('ulangtahun/tambah_cover');
+            Selamat, data kamu berhasil ditambahkan!</div>');
+            redirect('UlangTahun/tambah_cover');
         }
     }
 
@@ -175,21 +201,19 @@ class UlangTahun extends CI_Controller
                 }
             }
 
-            $this->db->set('cover', $cover);
-
             $check = $this->db->get_where('cover_ultah', ['id_user' => $id_user])->row();
 
             if ($check->id_user == $id_user) {
+                $this->db->set('id_user', $id_user);
                 $this->db->where('id_user',  $id_user);
                 $this->db->update('cover_ultah', $data);
             } else {
                 $this->db->insert('cover_ultah', $data);
             }
-
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-            Selamat, Data anda berhasil diubah! </div>');
-            redirect('dashboardultah/akhir');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+            Selamat, cover undangan berhasil ditambahkan! </div>');
+            redirect('DashboardUltah/akhir');
         }
     }
 
@@ -202,6 +226,7 @@ class UlangTahun extends CI_Controller
         $data['lokasi'] = $this->db->get_where('lok_ultah', ['id_user' => $this->session->userdata('id_user')])->row();
         $data['list'] = $this->db->get_where('list_undangan', ['id_user' => $this->session->userdata('id_user')])->row();
         $data['cover'] = $this->db->get_where('cover_ultah', ['id_user' => $this->session->userdata('id_user')])->row();
+        error_reporting(0);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_ultah', $data);
@@ -215,6 +240,7 @@ class UlangTahun extends CI_Controller
         $data['title'] = 'Edit Nama';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['nama'] = $this->db->get_where('nm_ultah', ['id_user' => $id])->row_array();
+        $data['jenkel'] = ['Putra', 'Putri'];
 
         // berikan rules untuk mengedit nama user
         $this->form_validation->set_rules('nama', 'Nama Panggilan', 'required');
@@ -231,6 +257,10 @@ class UlangTahun extends CI_Controller
         } else {
             $nama = $this->input->post('nama', true);
             $nama_lengkap = $this->input->post('nama_lengkap', true);
+            $nm_ayah = $this->input->post('nm_ayah', true);
+            $nm_ibu = $this->input->post('nm_ibu', true);
+            $jenis_kelamin = $this->input->post('jenis_kelamin', true);
+            $urutan = $this->input->post('urutan', true);
             $ultah_ke = $this->input->post('ultah_ke', true);
             $uc_tambahan = $this->input->post('uc_tambahan', true);
 
@@ -261,15 +291,19 @@ class UlangTahun extends CI_Controller
 
             $this->db->set('nama', $nama);
             $this->db->set('nama_lengkap', $nama_lengkap);
+            $this->db->set('nm_ayah', $nm_ayah);
+            $this->db->set('nm_ibu', $nm_ibu);
+            $this->db->set('jenis_kelamin', $jenis_kelamin);
+            $this->db->set('urutan', $urutan);
             $this->db->set('ultah_ke', $ultah_ke);
             $this->db->set('uc_tambahan', $uc_tambahan);
             $this->db->where('id', $this->input->post('id'));
             $this->db->update('nm_ultah');
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-    Selamat, nama berhasil diperbarui! </div>');
-            redirect('ulangtahun/pengaturan');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+    Selamat, data undangan berhasil diperbarui! </div>');
+            redirect('UlangTahun/pengaturan');
         }
     }
 
@@ -280,7 +314,7 @@ class UlangTahun extends CI_Controller
 
         $this->load->model('Ultah_model');
         $data['lokasi'] = $this->Ultah_model->getLokasiById($id);
-        $data['zona'] = ['WIB (Indonesia Barat)', 'WIT (Indonesia Timur)', 'WITA (Indonesia Tengah)'];
+        $data['zona'] = ['WIB', 'WIT', 'WITA'];
 
         $this->form_validation->set_rules('judul_acara', 'Judul Acara', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat Acara', 'required');
@@ -298,9 +332,9 @@ class UlangTahun extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->Ultah_model->editDataLokasi();
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
     Selamat, lokasi ulang tahun berhasil diperbarui! </div>');
-            redirect('ulangtahun/pengaturan');
+            redirect('UlangTahun/pengaturan');
         }
     }
 
@@ -344,7 +378,7 @@ class UlangTahun extends CI_Controller
             $this->Ultah_model->tambahDataListUndangan();
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                Selamat, Data Tamu Berhasil Ditambahkan!</div>');
-            redirect('ulangtahun/tambah_list');
+            redirect('UlangTahun/tambah_list');
         }
     }
 
@@ -354,7 +388,7 @@ class UlangTahun extends CI_Controller
 
         $this->Ultah_model->hapusDataUlangtahun($id);
         $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('ulangtahun/tambah_list');
+        redirect('UlangTahun/tambah_list');
     }
 
     public function edit_tamu($id)
@@ -375,9 +409,9 @@ class UlangTahun extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->Ultah_model->editDataList($id);
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
     Data Tamu Berhasil Di Ubah! </div>');
-            redirect('ulangtahun/tambah_list');
+            redirect('UlangTahun/tambah_list');
         }
     }
 
@@ -425,13 +459,13 @@ class UlangTahun extends CI_Controller
             }
 
             $this->db->set('id_user',  $id_user);
-            $this->db->where('cover', $cover);
+            $this->db->where('id_user', $id_user);
             $this->db->update('cover_ultah');
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, cover undangan berhasil diperbarui! </div>');
-            redirect('ulangtahun/pengaturan');
+            redirect('UlangTahun/pengaturan');
         }
     }
 
@@ -481,10 +515,13 @@ class UlangTahun extends CI_Controller
 
                 $this->load->library('upload', $config);
 
+                //cek jika ada gambar yang akan diupload
+                $upload_gambar = $_FILES['image']['name'];
+
                 if ($this->upload->do_upload('image')) {
                     // hapus gambar user lama
                     $gambar_lama = $data['gallery']['image'];
-                    if ($gambar_lama != '$gallery') {
+                    if ($gambar_lama != 'gallery') {
                         unlink(FCPATH . 'assets/images/ultah/gallery/' . $gambar_lama);
                     }
 
@@ -501,16 +538,16 @@ class UlangTahun extends CI_Controller
 
             if ($check->id_user == $id_user) {
                 $this->db->set('id_user', $id_user);
-                $this->db->where('nama',  $nama);
+                $this->db->where('id_user',  $id_user);
                 $this->db->update('gallery', $data);
             } else {
                 $this->db->insert('gallery', $data);
             }
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-            Selamat, gambar 1 berhasil diperbarui! </div>');
-            redirect('ulangtahun/gallery');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Selamat, gambar 1 berhasil diperbarui! </div>');
+            redirect('UlangTahun/gallery');
         }
     }
 
@@ -567,16 +604,16 @@ class UlangTahun extends CI_Controller
 
             if ($check->id_user == $id_user) {
                 $this->db->set('id_user', $id_user);
-                $this->db->where('nama',  $nama);
+                $this->db->where('id_user',  $id_user);
                 $this->db->update('gallery', $data);
             } else {
                 $this->db->insert('gallery', $data);
             }
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, gambar 1 berhasil diperbarui! </div>');
-            redirect('ulangtahun/gallery');
+            redirect('UlangTahun/gallery');
         }
     }
 
@@ -633,16 +670,16 @@ class UlangTahun extends CI_Controller
 
             if ($check->id_user == $id_user) {
                 $this->db->set('id_user', $id_user);
-                $this->db->where('nama',  $nama);
+                $this->db->where('id_user',  $id_user);
                 $this->db->update('gallery', $data);
             } else {
                 $this->db->insert('gallery', $data);
             }
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, gambar 1 berhasil diperbarui! </div>');
-            redirect('ulangtahun/gallery');
+            redirect('UlangTahun/gallery');
         }
     }
 
@@ -699,16 +736,16 @@ class UlangTahun extends CI_Controller
 
             if ($check->id_user == $id_user) {
                 $this->db->set('id_user', $id_user);
-                $this->db->where('nama',  $nama);
+                $this->db->where('id_user',  $id_user);
                 $this->db->update('gallery', $data);
             } else {
                 $this->db->insert('gallery', $data);
             }
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, gambar 1 berhasil diperbarui! </div>');
-            redirect('ulangtahun/gallery');
+            redirect('UlangTahun/gallery');
         }
     }
 
@@ -765,16 +802,16 @@ class UlangTahun extends CI_Controller
 
             if ($check->id_user == $id_user) {
                 $this->db->set('id_user', $id_user);
-                $this->db->where('nama',  $nama);
+                $this->db->where('id_user',  $id_user);
                 $this->db->update('gallery', $data);
             } else {
                 $this->db->insert('gallery', $data);
             }
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, gambar 1 berhasil diperbarui! </div>');
-            redirect('ulangtahun/gallery');
+            redirect('UlangTahun/gallery');
         }
     }
 
@@ -806,7 +843,7 @@ class UlangTahun extends CI_Controller
 
             if ($upload_gambar) {
                 $config['allowed_types'] = 'mp3';
-                $config['max_size']      = '5000';
+                $config['max_size']      = '7000';
                 $config['upload_path']   = './assets/musik/ulangtahun/';
 
                 $this->load->library('upload', $config);
@@ -838,9 +875,9 @@ class UlangTahun extends CI_Controller
             }
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, musik anda berhasil ditambahkan! </div>');
-            redirect('ulangtahun/pengaturan');
+            redirect('UlangTahun/pengaturan');
         }
     }
 
@@ -864,9 +901,9 @@ class UlangTahun extends CI_Controller
         } else {
             $this->Ultah_model->tambahHitungMundur();
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, hitung mundur berhasil ditambahkan! </div>');
-            redirect('ulangtahun/pengaturan');
+            redirect('UlangTahun/pengaturan');
         }
     }
 
@@ -890,9 +927,22 @@ class UlangTahun extends CI_Controller
         } else {
             $this->Ultah_model->tambahAmplop();
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, amplop anda berhasil ditambahkan! </div>');
-            redirect('ulangtahun/pengaturan');
+            redirect('UlangTahun/pengaturan');
         }
+    }
+
+    public function desain()
+    {
+        $data['title'] = 'Desain Undangan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->db->get_where('gallery', ['id_user' => $this->session->userdata('id_user')])->row_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar_ultah', $data);
+        $this->load->view('templates/topbar_user', $data);
+        $this->load->view('ultah/desain', $data);
+        $this->load->view('templates/footer');
     }
 }

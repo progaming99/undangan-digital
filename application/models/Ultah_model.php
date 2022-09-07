@@ -3,6 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Ultah_model extends CI_Model
 {
+    public function getAllMenu()
+    {
+        return $this->db->get('menu')->result_array();
+    }
+
     public function getLokasiByid($id)
     {
         return $this->db->get_where('lok_ultah', ['id_user' => $id])->row_array();
@@ -80,13 +85,26 @@ class Ultah_model extends CI_Model
 
     public function tambahHitungMundur()
     {
+        $id_user =  $this->session->userdata('id_user', true);
+        $tahun   = $this->input->post('tahun', true);
+        $bulan   = $this->input->post('bulan', true);
+        $hari    = $this->input->post('hari', true);
+
         $data = [
-            "id_user" =>  $this->session->userdata('id_user', true),
-            "tahun" => $this->input->post('tahun', true),
-            "bulan" => $this->input->post('bulan', true),
-            "hari" => $this->input->post('hari', true)
+            "id_user" =>  $id_user,
+            "tahun" => $tahun,
+            "bulan" => $bulan,
+            "hari" => $hari
         ];
-        $this->db->insert('hitung_mundur', $data);
+        $check = $this->db->get_where('hitung_mundur', ['id_user' => $id_user])->row();
+
+        if ($check->id_user == $id_user) {
+            $this->db->set('id_user', $id_user);
+            $this->db->where('id_user',  $id_user);
+            $this->db->update('hitung_mundur', $data);
+        } else {
+            $this->db->insert('hitung_mundur', $data);
+        }
     }
 
     public function tambahAmplop()

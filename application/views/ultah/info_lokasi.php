@@ -15,47 +15,51 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Judul</div>
-                                            <input type="text" class="form-control form-control-user" id="judul_acara" name="judul_acara" placeholder="Judul Acara" value="<?= set_value('judul_acara'); ?>">
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="text" class="form-control form-control-user" id="judul_acara" name="judul_acara" placeholder="Judul Acara" value="<?= $lokasi['judul_acara']; ?>">
+                                            <?= form_error('judul_acara', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Alamat</div>
-                                            <input type="text" class="form-control form-control-user" id="alamat" name="alamat" placeholder="jl..." value="<?= set_value('alamat'); ?>"></input>
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="text" class="form-control form-control-user" id="alamat" name="alamat" placeholder="jl..." value="<?= $lokasi['alamat']; ?>"></input>
+                                            <?= form_error('alamat', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Nama Lokasi</div>
-                                            <input type="text" class="form-control form-control-user" id="nm_lokasi" name="nm_lokasi" placeholder="Rumah/Gedung" value="<?= set_value('nm_lokasi'); ?>">
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="text" class="form-control form-control-user" id="nm_lokasi" name="nm_lokasi" placeholder="Rumah/Gedung" value="<?= $lokasi['nm_lokasi']; ?>">
+                                            <?= form_error('nm_lokasi', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Tanggal Acara</div>
-                                            <input type="date" class="form-control form-control-user" id="tgl_acara" name="tgl_acara" placeholder="Ucapan Tambahan" value="<?= set_value('tgl_acara'); ?>"></input>
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="date" class="form-control form-control-user" id="tgl_acara" name="tgl_acara" placeholder="Ucapan Tambahan" value="<?= $lokasi['tgl_acara']; ?>"></input>
+                                            <?= form_error('tgl_acara', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Waktu Mulai Acara</div>
-                                            <input type="time" class="form-control form-control-user" id="w_mulai" name="w_mulai" placeholder="Ucapan Tambahan" value="<?= set_value('w_mulai'); ?>"></input>
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="time" class="form-control form-control-user" id="w_mulai" name="w_mulai" placeholder="Ucapan Tambahan" value="<?= $lokasi['w_mulai']; ?>"></input>
+                                            <?= form_error('w_mulai', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Waktu Selesai Acara</div>
-                                            <input type="time" class="form-control form-control-user" id="w_selesai" name="w_selesai" placeholder="Ucapan Tambahan" value="<?= set_value('w_selesai'); ?>"></input>
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <input type="time" class="form-control form-control-user" id="w_selesai" name="w_selesai" placeholder="Ucapan Tambahan" value="<?= $lokasi['w_selesai']; ?>"></input>
+                                            <?= form_error('w_selesai', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Tampilan Zona Waktu</div>
-                                            <select name="z_waktu" id="z_waktu" class="form-control" value="<?= set_value('z_waktu'); ?>">
-                                                <option value="">Pilih Zona Waktu</option>
-                                                <option value="WIB (Indonesia Barat)">WIB (Indonesia Barat)</option>
-                                                <option value="WIT (Indonesia Timur)">WIT (Indonesia Timur)</option>
-                                                <option value="WITA (Indonesia Tengah)">WITA (Indonesia Tengah)</option>
+                                            <select name="z_waktu" id="z_waktu" class="form-control">
+                                                <?php foreach ($zona as $z) : ?>
+                                                    <?php if ($z == $lokasi['z_waktu']) : ?>
+                                                        <option value="<?= $z; ?>" selected><?= $z; ?></option>
+                                                    <?php else : ?>
+                                                        <option value="<?= $z ?>"><?= $z; ?></option>
+                                                    <?php endif; ?>
+                                                <?php endforeach; ?>
                                             </select>
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <?= form_error('z_waktu', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="sharelok" name="sharelok" placeholder="Url Map" <?= set_value('sharelok'); ?>></input>
-                                            <?= form_error('pesan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            <div class="small mb-1 ml-3">Bagikan Lokasi Anda</div>
+                                            <input type="text" class="form-control form-control-user" id="sharelok" name="sharelok" placeholder="Url Map" value="<?= $lokasi['sharelok']; ?>"></input>
+                                            <?= form_error('sharelok', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Simpan

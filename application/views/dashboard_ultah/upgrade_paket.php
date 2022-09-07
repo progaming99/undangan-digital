@@ -22,7 +22,7 @@
                                         <p class="text-center"><?= $harga['fitur8']; ?></p>
                                         <p class="text-center"><?= $harga['fitur9']; ?></p>
                                         <p class="text-center font-weight-bold"><?= $harga['harga']; ?></p>
-                                        <a href="<?= base_url('dashboardultah/metode_pembayaran'); ?>" class="btn btn-google btn-block">Bayar</a>
+                                        <a href="<?= base_url('DashboardUltah/metode_pembayaran'); ?>" class="btn btn-google btn-block">Bayar</a>
                                     </div>
                                 </div>
                             </div>

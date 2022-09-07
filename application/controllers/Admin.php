@@ -19,6 +19,7 @@ class Admin extends CI_Controller
         $this->db->where('id !=', 11);
         $data['nama'] = $this->db->get('user')->result_array();
 
+
         // Mendapatkan IP user
         $ip    = $this->input->ip_address();
 
@@ -85,6 +86,7 @@ class Admin extends CI_Controller
     {
         $data['title']  = 'Menu Pernikahan';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        error_reporting(0);
 
         // $data['pria'] = $this->db->get_where('nm_mempelai', ['id_user' => 'id'])->row_array();
         $data['menu'] = $this->Admin_model->getMenuById($id);
@@ -142,7 +144,7 @@ class Admin extends CI_Controller
 
             $this->Admin_model->editDataMempelaiPria();
             $this->session->set_flashdata('flash', 'Diedit');
-            redirect('admin/daftar_mempelai');
+            redirect('Admin/daftar_mempelai');
         }
     }
 
@@ -150,7 +152,7 @@ class Admin extends CI_Controller
     {
         $this->Admin_model->hapusDataMempelai($id);
         $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('admin/mempelai_wanita');
+        redirect('Admin/mempelai_wanita');
     }
 
     public function edit_mempelai_wanita($id)
@@ -198,7 +200,7 @@ class Admin extends CI_Controller
 
             $this->Admin_model->editDataMempelaiWanita();
             $this->session->set_flashdata('flash', 'Diedit');
-            redirect('admin/daftar_mempelai');
+            redirect('Admin/daftar_mempelai');
         }
     }
 
@@ -234,7 +236,7 @@ class Admin extends CI_Controller
         } else {
             $this->Admin_model->editDataLokasi();
             $this->session->set_flashdata('flash', 'Diedit');
-            redirect('admin/daftar_mempelai');
+            redirect('Admin/daftar_mempelai');
         }
     }
 
@@ -256,7 +258,7 @@ class Admin extends CI_Controller
     {
         $this->Admin_model->hapusDataTamu($id);
         $this->session->set_flashdata('flash', 'Dihapus');
-        redirect('admin/list_undangan');
+        redirect('Admin/list_undangan');
     }
 
     public function edit_tamu($id)
@@ -276,7 +278,7 @@ class Admin extends CI_Controller
         } else {
             $this->Admin_model->editDataTamu();
             $this->session->set_flashdata('flash', 'Diedit');
-            redirect('admin/list_undangan');
+            redirect('Admin/list_undangan');
         }
     }
 
@@ -296,7 +298,7 @@ class Admin extends CI_Controller
         } else {
             $this->Admin_model->tambahDataTamu();
             $this->session->set_flashdata('flash', 'Ditambahkan');
-            redirect('admin/list_undangan');
+            redirect('Admin/list_undangan');
         }
     }
 
@@ -356,9 +358,9 @@ class Admin extends CI_Controller
             }
             $this->Admin_model->editMusik();
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, musik anda berhasil ditambahkan! </div>');
-            redirect('admin/daftar_mempelai');
+            redirect('Admin/daftar_mempelai');
         }
     }
     //menu pernikahan end
@@ -437,7 +439,7 @@ class Admin extends CI_Controller
 
             $this->Admin_model->editDataUltah();
             $this->session->set_flashdata('flash', 'Diedit');
-            redirect('admin/daftar_ultah');
+            redirect('Admin/daftar_ultah');
         }
     }
 
@@ -466,23 +468,484 @@ class Admin extends CI_Controller
         } else {
             $this->Admin_model->editDataLokasiUltah();
             $this->session->set_flashdata('flash', 'Diedit');
-            redirect('admin/daftar_ultah');
+            redirect('Admin/daftar_ultah');
         }
     }
 
-    public function list_undangan_ultah()
+    public function list_undangan_ultah($id)
     {
         $data['title']  = 'List Undangan Mempelai';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['list'] = $this->Admin_model->getAllListUndanganUltah();
+        $data['list'] = $this->Admin_model->getAllListUndanganUltah($id);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/menu_ultah/list_undangan_ultah', $data);
+        $this->load->view('admin/menu_ultah/list_undangan', $data);
         $this->load->view('templates/footer');
     }
+
+    public function hapus_tamu_ultah($id)
+    {
+        $this->Admin_model->hapusDataTamu($id);
+        $this->session->set_flashdata('flash', 'Dihapus');
+        redirect('Admin/list_undangan_ultah');
+    }
+
+    public function edit_tamu_ultah($id)
+    {
+        $data['title']  = 'Edit Tamu Undangan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['list'] = $this->Admin_model->getListById($id);
+
+        $this->form_validation->set_rules('Nama', 'Nama Tamu', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_tamu', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Admin_model->editDataTamu();
+            $this->session->set_flashdata('flash', 'Diedit');
+            redirect('Admin/list_undangan_ultah');
+        }
+    }
+
+    public function tambah_tamu_ultah()
+    {
+        $data['title']  = 'Tambah Tamu Undangan';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/tambah_tamu', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Admin_model->tambahDataTamu();
+            $this->session->set_flashdata('flash', 'Ditambahkan');
+            redirect('Admin/list_undangan_ultah');
+        }
+    }
+
+    public function edit_cover_ultah($id)
+    {
+        $data['title'] = 'Edit Cover Ulang Tahun';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['cover'] = $this->Admin_model->getCoverUltahById($id);
+
+        $this->form_validation->set_rules('cover', 'Nama cover', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_cover_ultah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //cek jika ada gambar yang akan diupload
+            $upload_gambar = $_FILES['image']['name'];
+
+            if ($upload_gambar) {
+                $config['allowed_types'] = 'png|jpg';
+                $config['max_size'] = '3096';
+                $config['upload_path'] = './assets/images/ultah/cover_ultah/';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('image')) {
+                    // hapus gambar user lama
+                    $gambar_lama = $data['cover']['image'];
+                    if ($gambar_lama != '$cover') {
+                        unlink(FCPATH . 'assets/images/ultah/cover_ultah/' . $gambar_lama);
+                    }
+
+                    // upload gambar user baru
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('image', $gambar_baru);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->Admin_model->editCoverUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+            Selamat, cover undangan berhasil diperbarui! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function gallery_ultah($id)
+    {
+        $data['title'] = 'Gallery';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->Admin_model->getAllGalleryUltah($id);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/menu_ultah/edit_gallery_ultah', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function edit_gallery1($id)
+    {
+        $data['title'] = 'Gallery Ulang Tahun';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->Admin_model->getGalleryUltahById($id);
+
+        $this->form_validation->set_rules('nama', 'Nama cover', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_gallery1', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //cek jika ada gambar yang akan diupload
+            $upload_gambar = $_FILES['image']['name'];
+
+            if ($upload_gambar) {
+                $config['allowed_types'] = 'png|jpg';
+                $config['max_size']      = '2048';
+                $config['upload_path']   = './assets/images/ultah/gallery/';
+
+                $this->load->library('upload', $config);
+
+                //cek jika ada gambar yang akan diupload
+                $upload_gambar = $_FILES['image']['name'];
+
+                if ($this->upload->do_upload('image')) {
+                    // hapus gambar user lama
+                    $gambar_lama = $data['gallery']['image'];
+                    if ($gambar_lama != 'gallery') {
+                        unlink(FCPATH . 'assets/images/ultah/gallery/' . $gambar_lama);
+                    }
+
+                    // upload gambar user baru
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('image', $gambar_baru);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->Admin_model->editGalleryUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Selamat, foto 1 berhasil diperbarui! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function edit_gallery2($id)
+    {
+        $data['title'] = 'Gallery Ulang Tahun';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->Admin_model->getGalleryUltahById($id);
+
+        $this->form_validation->set_rules('nama', 'Nama cover', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_gallery2', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //cek jika ada gambar yang akan diupload
+            $upload_gambar = $_FILES['image2']['name'];
+
+            if ($upload_gambar) {
+                $config['allowed_types'] = 'png|jpg';
+                $config['max_size']      = '2048';
+                $config['upload_path']   = './assets/images/ultah/gallery/';
+
+                $this->load->library('upload', $config);
+
+                //cek jika ada gambar yang akan diupload
+                $upload_gambar = $_FILES['image2']['name'];
+
+                if ($this->upload->do_upload('image2')) {
+                    // hapus gambar user lama
+                    $gambar_lama = $data['gallery']['image2'];
+                    if ($gambar_lama != 'gallery') {
+                        unlink(FCPATH . 'assets/images/ultah/gallery/' . $gambar_lama);
+                    }
+
+                    // upload gambar user baru
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('image2', $gambar_baru);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->Admin_model->editGalleryUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Selamat, foto 2 berhasil diperbarui! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function edit_gallery3($id)
+    {
+        $data['title'] = 'Gallery Ulang Tahun';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->Admin_model->getGalleryUltahById($id);
+
+        $this->form_validation->set_rules('nama', 'Nama cover', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_gallery3', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //cek jika ada gambar yang akan diupload
+            $upload_gambar = $_FILES['image3']['name'];
+
+            if ($upload_gambar) {
+                $config['allowed_types'] = 'png|jpg';
+                $config['max_size']      = '2048';
+                $config['upload_path']   = './assets/images/ultah/gallery/';
+
+                $this->load->library('upload', $config);
+
+                //cek jika ada gambar yang akan diupload
+                $upload_gambar = $_FILES['image3']['name'];
+
+                if ($this->upload->do_upload('image3')) {
+                    // hapus gambar user lama
+                    $gambar_lama = $data['gallery']['image3'];
+                    if ($gambar_lama != 'gallery') {
+                        unlink(FCPATH . 'assets/images/ultah/gallery/' . $gambar_lama);
+                    }
+
+                    // upload gambar user baru
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('image3', $gambar_baru);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->Admin_model->editGalleryUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Selamat, foto 3 berhasil diperbarui! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function edit_gallery4($id)
+    {
+        $data['title'] = 'Gallery Ulang Tahun';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->Admin_model->getGalleryUltahById($id);
+
+        $this->form_validation->set_rules('nama', 'Nama cover', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_gallery4', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //cek jika ada gambar yang akan diupload
+            $upload_gambar = $_FILES['image4']['name'];
+
+            if ($upload_gambar) {
+                $config['allowed_types'] = 'png|jpg';
+                $config['max_size']      = '2048';
+                $config['upload_path']   = './assets/images/ultah/gallery/';
+
+                $this->load->library('upload', $config);
+
+                //cek jika ada gambar yang akan diupload
+                $upload_gambar = $_FILES['image4']['name'];
+
+                if ($this->upload->do_upload('image4')) {
+                    // hapus gambar user lama
+                    $gambar_lama = $data['gallery']['image4'];
+                    if ($gambar_lama != 'gallery') {
+                        unlink(FCPATH . 'assets/images/ultah/gallery/' . $gambar_lama);
+                    }
+
+                    // upload gambar user baru
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('image4', $gambar_baru);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->Admin_model->editGalleryUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Selamat, foto 4 berhasil diperbarui! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function edit_gallery5($id)
+    {
+        $data['title'] = 'Gallery Ulang Tahun';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['gallery'] = $this->Admin_model->getGalleryUltahById($id);
+
+        $this->form_validation->set_rules('nama', 'Nama cover', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_gallery5', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //cek jika ada gambar yang akan diupload
+            $upload_gambar = $_FILES['image5']['name'];
+
+            if ($upload_gambar) {
+                $config['allowed_types'] = 'png|jpg';
+                $config['max_size']      = '2058';
+                $config['upload_path']   = './assets/images/ultah/gallery/';
+
+                $this->load->library('upload', $config);
+
+                //cek jika ada gambar yang akan diupload
+                $upload_gambar = $_FILES['image5']['name'];
+
+                if ($this->upload->do_upload('image5')) {
+                    // hapus gambar user lama
+                    $gambar_lama = $data['gallery']['image5'];
+                    if ($gambar_lama != 'gallery') {
+                        unlink(FCPATH . 'assets/images/ultah/gallery/' . $gambar_lama);
+                    }
+
+                    // upload gambar user baru
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('image5', $gambar_baru);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+
+            $this->Admin_model->editGalleryUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Selamat, foto 5 berhasil diperbarui! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function edit_musik_ultah($id)
+    {
+        $data['title'] = 'Tambah Musik';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['musik'] = $this->Admin_model->getMusikUltahById($id);
+
+        $this->form_validation->set_rules('nama', 'Full Nama', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_musik_ultah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //cek jika ada gambar yang akan diupload
+            $upload_gambar = $_FILES['musik']['name'];
+
+            if ($upload_gambar) {
+                $config['allowed_types'] = 'mp3';
+                $config['max_size']      = '7000';
+                $config['upload_path']   = './assets/musik/ulangtahun/';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('musik')) {
+                    // hapus gambar user lama
+                    $gambar_lama = $data['nama']['musik'];
+                    if ($gambar_lama != '') {
+                        unlink(FCPATH . 'assets/musik/ulangtahun/' . $gambar_lama);
+                    }
+
+                    // upload gambar user baru
+                    $gambar_baru = $this->upload->data('file_name');
+                    $this->db->set('musik', $gambar_baru);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+            $this->Admin_model->editMusikUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            Selamat, musik anda berhasil ditambahkan! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function edit_hitung_ultah($id)
+    {
+        $data['title'] = 'Edit Hitung Mundur';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['hitung'] = $this->Admin_model->getHitungUltahById($id);
+
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required|trim');
+        $this->form_validation->set_rules('bulan', 'Bulan', 'required|trim');
+        $this->form_validation->set_rules('hari', 'Hari', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_hitung_mundur', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Admin_model->editHitungUltah();
+            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            Selamat, hitung mundur berhasil ditambahkan! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
+    public function edit_amplop_ultah($id)
+    {
+        $data['title'] = 'Edit Amplop Ultah';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['amplop'] = $this->Admin_model->getAmplopUltahById($id);
+
+        $this->form_validation->set_rules('nama_bank', 'Nama Bank', 'required|trim');
+        $this->form_validation->set_rules('no_rek', 'No Rekening', 'required|trim');
+        $this->form_validation->set_rules('an', 'Atas Nama', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/menu_ultah/edit_amplop', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Admin_model->editAmplopUltah();
+            // buat flash data agar memberi tahu user bahwa data berhasil diedit
+            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            Selamat, amplop anda berhasil ditambahkan! </div>');
+            redirect('Admin/daftar_ultah');
+        }
+    }
+
     //menu ultah end
     public function edit_user($id)
     {
@@ -534,7 +997,7 @@ class Admin extends CI_Controller
 
             $this->users_model->editDataUser();
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
                 Selamat, Data user berhasil diubah! </div>');
             redirect('admin');
         }
@@ -577,6 +1040,22 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function user_akses($akses_id)
+    {
+        $data['title'] = 'Akses User';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['akses'] = $this->db->get_where('user', ['id' => $akses_id])->row_array();
+
+        $this->db->where('id !=', 1);
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('menu/user_akses', $data);
+        $this->load->view('templates/footer_akses');
+    }
+
     public function changeAccess()
     {
         $menu_id = $this->input->post('menuId');
@@ -593,8 +1072,28 @@ class Admin extends CI_Controller
         } else {
             $this->db->delete('user_access_menu', $data);
         }
-        $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
         Akses telah dirubah !! </div>');
+    }
+
+    public function ubah_akses()
+    {
+        $menu_id = $this->input->post('menuId');
+        $user_id = $this->input->post('userId');
+
+        $data = [
+            'user_id' => $user_id,
+            'menu_id' => $menu_id
+        ];
+
+        $result = $this->db->get_where('user_access_menu', $data);
+        if ($result->num_rows() < 1) {
+            $this->db->insert('user_access_menu', $data);
+        } else {
+            $this->db->delete('user_access_menu', $data);
+        }
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+        Akses menu berhasil diberikan!! </div>');
     }
 
     public function logo_web()
@@ -663,658 +1162,11 @@ class Admin extends CI_Controller
             $this->db->update('logo_web');
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Logo Web anda berhasil diubah! </div>');
             redirect('admin/logo_web');
         }
     }
-
-    // public function promo()
-    // {
-    //     $data['title'] = 'Promo';
-    //     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-    //     $data['promo'] = $this->db->get('promo')->result_array();
-
-
-    //     $this->load->view('templates/header', $data);
-    //     $this->load->view('templates/sidebar', $data);
-    //     $this->load->view('templates/topbar', $data);
-    //     $this->load->view('admin/promo', $data);
-    //     $this->load->view('templates/footer');
-    // }
-
-    // public function edit_promo($id)
-    // {
-    //     $data['title'] = 'Edit Promo';
-    //     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-    //     $data['promo'] = $this->db->get_where('promo', ['id' => $id])->row_array();
-
-    //     // berikan rules untuk mengedit nama user
-    //     $this->form_validation->set_rules('judul_promo', 'Judul Promo', 'required');
-    //     $this->form_validation->set_rules('slogan', 'Slogan', 'required');
-
-    //     // jalankan form validation
-    //     if ($this->form_validation->run() == false) {
-
-    //         $this->load->view('templates/header', $data);
-    //         $this->load->view('templates/sidebar', $data);
-    //         $this->load->view('templates/topbar', $data);
-    //         $this->load->view('admin/edit_promo', $data);
-    //         $this->load->view('templates/footer');
-    //     } else {
-
-    //         $nama    = $this->input->post('nama', true);
-
-    //         //cek jika ada gambar yang akan diupload
-    //         $upload_gambar = $_FILES['image']['name'];
-
-    //         if ($upload_gambar) {
-    //             $config['allowed_types'] = 'gif|png|jpg';
-    //             $config['max_size'] = 1024;
-    //             $config['upload_path'] = './front-end/assets/img/promo/';
-
-    //             $this->load->library('upload', $config);
-
-    //             if ($this->upload->do_upload('image')) {
-    //                 // hapus gambar user lama
-    //                 $gambar_lama = $data['promo']['image'];
-    //                 if ($gambar_lama != 'promo.jpg') {
-    //                     unlink(FCPATH . 'front-end/assets/img/promo/' . $gambar_lama);
-    //                 }
-
-    //                 // upload gambar user baru
-    //                 $gambar_baru = $this->upload->data('file_name');
-    //                 $this->db->set('image', $gambar_baru);
-    //             } else {
-    //                 echo $this->upload->display_errors();
-    //             }
-    //         }
-    //         $this->db->set('nama', $nama);
-    //         $this->db->where('id', $this->input->post('id'));
-    //         $this->db->update('promo');
-
-    //         // buat flash data agar memberi tahu user bahwa data berhasil diedit
-    //         $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-    //         Promo anda berhasil diubah! </div>');
-    //         redirect('admin/promo');
-    //     }
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function thanks()
-    {
-        $data['title'] = 'Terima Kasih';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->db->order_by('id', 'DESC');
-
-        $data['banner_utama'] = $this->db->get('banner_utama')->result_array();
-
-
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('link', 'Link', 'required');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/thanks', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $config['upload_path']          = './wedding-2/images/wedding/wedding-1/thanks';
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 2048;
-
-            $this->load->library('upload', $config);
-
-            if (!$this->upload->do_upload('image')) {
-                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                Gambar anda belum ditambahkan </div>');
-                redirect('admin/thanks');
-            } else {
-                $gambar     = $this->upload->data();
-                $gambar     = $gambar['file_name'];
-                $nama       = $this->input->post('nama', true);
-                $link       = $this->input->post('link', true);
-
-                $data = [
-                    'nama'      => $nama,
-                    'image'     => $gambar,
-                    'link'      => $link
-                ];
-
-                $this->db->insert('banner_utama', $data);
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-                Gambar Ucapan Terima kasih anda sudah berhasil ditambahkan </div>');
-                redirect('admin/thanks');
-            }
-        }
-    }
-
-
-
-
-    public function edit_thanks($id)
-    {
-        $data['title'] = 'Edit Terima kasih';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $data['banner_utama'] = $this->db->get_where('banner_utama', ['id' => $id])->row_array();
-
-        // berikan rules untuk mengedit nama user
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('link', 'Link', 'required');
-
-        // jalankan form validation
-        if ($this->form_validation->run() == false) {
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/edit_thanks', $data);
-            $this->load->view('templates/footer');
-        } else {
-
-            $nama       = $this->input->post('nama', true);
-            $link       = $this->input->post('link', true);
-
-            //cek jika ada gambar yang akan diupload
-            $upload_gambar = $_FILES['image']['name'];
-
-            if ($upload_gambar) {
-                $config['allowed_types'] = 'gif|png|jpg';
-                $config['max_size'] = 1024;
-                $config['upload_path'] = './wedding-2/images/wedding/wedding-1/thanks';
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('image')) {
-                    // hapus gambar user lama
-                    $gambar_lama = $data['banner_1']['image'];
-                    if ($gambar_lama != 'bg-1.png') {
-                        unlink(FCPATH . 'wedding-2/images/wedding/wedding-1/thanks' . $gambar_lama);
-                    }
-
-                    // upload gambar user baru
-                    $gambar_baru = $this->upload->data('file_name');
-                    $this->db->set('image', $gambar_baru);
-                } else {
-                    echo $this->upload->display_errors();
-                }
-            }
-            $this->db->set('nama', $nama);
-            $this->db->set('link', $link);
-            $this->db->where('id', $this->input->post('id'));
-            $this->db->update('banner_utama');
-
-            // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-            Selamat, Gambar Ucapan terima kasih anda anda berhasil diubah! </div>');
-            redirect('admin/thanks');
-        }
-    }
-
-
-    public function delete_thanks($id)
-    {
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $this->db->delete('banner_utama', ['id' => $id]);
-        $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-        Gambar Ucapan terima kasih sudah berhasil dihapus </div>');
-        redirect('admin/thanks');
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function instagram()
-    {
-        $data['title'] = 'Instagram';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->db->order_by('id', 'DESC');
-
-        $data['instagram'] = $this->db->get('instagram')->result_array();
-
-
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('link', 'Link', 'required');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/instagram', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $config['upload_path']          = './front-end/assets/img/instagram/';
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 2048;
-
-            $this->load->library('upload', $config);
-
-            if (!$this->upload->do_upload('image')) {
-                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                Gambar anda belum ditambahkan </div>');
-                redirect('admin/instagram');
-            } else {
-                $gambar     = $this->upload->data();
-                $gambar     = $gambar['file_name'];
-                $nama       = $this->input->post('nama', true);
-                $link       = $this->input->post('link', true);
-
-                $data = [
-                    'nama'      => $nama,
-                    'image'     => $gambar,
-                    'link'      => $link
-                ];
-
-                $this->db->insert('instagram', $data);
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-                Gambar instagram anda sudah berhasil ditambahkan </div>');
-                redirect('admin/instagram');
-            }
-        }
-    }
-
-
-
-    public function edit_instagram($id)
-    {
-        $data['title'] = 'Edit Instagram';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $data['instagram'] = $this->db->get_where('instagram', ['id' => $id])->row_array();
-
-        // berikan rules untuk mengedit nama user
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('link', 'Link', 'required');
-
-        // jalankan form validation
-        if ($this->form_validation->run() == false) {
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/edit_instagram', $data);
-            $this->load->view('templates/footer');
-        } else {
-
-            $nama       = $this->input->post('nama', true);
-            $link       = $this->input->post('link', true);
-
-            //cek jika ada gambar yang akan diupload
-            $upload_gambar = $_FILES['image']['name'];
-
-            if ($upload_gambar) {
-                $config['allowed_types'] = 'gif|png|jpg';
-                $config['max_size'] = 1024;
-                $config['upload_path'] = './front-end/assets/img/instagram/';
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('image')) {
-                    // hapus gambar user lama
-                    $gambar_lama = $data['instagram']['image'];
-                    if ($gambar_lama != 'bg-1.png') {
-                        unlink(FCPATH . 'front-end/assets/img/instagram/' . $gambar_lama);
-                    }
-
-                    // upload gambar user baru
-                    $gambar_baru = $this->upload->data('file_name');
-                    $this->db->set('image', $gambar_baru);
-                } else {
-                    echo $this->upload->display_errors();
-                }
-            }
-            $this->db->set('nama', $nama);
-            $this->db->set('link', $link);
-            $this->db->where('id', $this->input->post('id'));
-            $this->db->update('instagram');
-
-            // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-            Selamat, instagram anda anda berhasil diubah! </div>');
-            redirect('admin/instagram');
-        }
-    }
-
-
-    public function delete_instagram($id)
-    {
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $this->db->delete('instagram', ['id' => $id]);
-        $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                Instagram sudah berhasil dihapus </div>');
-        redirect('admin/instagram');
-    }
-
-
-
-
-    public function sponsor()
-    {
-        $data['title']  = 'Sponsor';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->db->order_by('id', 'DESC');
-
-        $data['sponsor'] = $this->db->get('sponsor')->result_array();
-
-
-        $this->form_validation->set_rules('nama', 'Nama Sponsor', 'required');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/sponsor', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $config['upload_path']          = './front-end/assets/img/sponsor/';
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 2048;
-
-            $this->load->library('upload', $config);
-
-            if (!$this->upload->do_upload('image')) {
-                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                Gambar Sponsor belum ditambahkan </div>');
-                redirect('admin/sponsor');
-            } else {
-                $gambar     = $this->upload->data();
-                $gambar     = $gambar['file_name'];
-                $nama       = $this->input->post('nama', true);
-
-                $data = [
-                    'nama'      => $nama,
-                    'image'     => $gambar
-                ];
-
-                $this->db->insert('sponsor', $data);
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-                Sponsor sudah berhasil ditambahkan </div>');
-                redirect('admin/sponsor');
-            }
-        }
-    }
-
-
-
-    public function edit_sponsor($id)
-    {
-        $data['title'] = 'Edit Sponsor';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $data['sponsor'] = $this->db->get_where('sponsor', ['id' => $id])->row_array();
-
-        // berikan rules untuk mengedit nama user
-        $this->form_validation->set_rules('nama', 'Nama Sponsor', 'required');
-
-        // jalankan form validation
-        if ($this->form_validation->run() == false) {
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/edit_sponsor', $data);
-            $this->load->view('templates/footer');
-        } else {
-
-            $nama           = $this->input->post('nama', true);
-
-            //cek jika ada gambar yang akan diupload
-            $upload_gambar = $_FILES['image']['name'];
-
-            if ($upload_gambar) {
-                $config['allowed_types'] = 'gif|png|jpg';
-                $config['max_size'] = '1024';
-                $config['upload_path'] = './front-end/assets/img/sponsor/';
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('image')) {
-                    // hapus gambar user lama
-                    $gambar_lama = $data['media']['image'];
-                    if ($gambar_lama != 'bg-1.png') {
-                        unlink(FCPATH . 'front-end/assets/img/sponsor/' . $gambar_lama);
-                    }
-
-                    // upload gambar user baru
-                    $gambar_baru = $this->upload->data('file_name');
-                    $this->db->set('image', $gambar_baru);
-                } else {
-                    echo $this->upload->display_errors();
-                }
-            }
-            $this->db->set('nama', $nama);
-            $this->db->where('id', $this->input->post('id'));
-            $this->db->update('sponsor');
-
-            // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary text-center" role="alert">
-            Sponsor anda berhasil diubah! </div>');
-            redirect('admin/sponsor');
-        }
-    }
-
-
-
-    public function delete_sponsor($id)
-    {
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $this->db->delete('sponsor', ['id' => $id]);
-        $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                Sponsor sudah berhasil dihapus </div>');
-        redirect('admin/sponsor');
-    }
-
-
-
-
-
-    public function page_template()
-    {
-        $data['title'] = 'Page Template';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->db->order_by('id', 'DESC');
-        $data['page_template'] = $this->db->get('page_template')->result_array();
-
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/page_template', $data);
-        $this->load->view('templates/footer');
-    }
-
-
-
-    public function tambah_page()
-    {
-        $data['title'] = 'Tambah Page Template';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $this->db->order_by('id', 'DESC');
-
-        $data['page_template'] = $this->db->get('page_template')->result_array();
-
-
-        $this->form_validation->set_rules('judul', 'Judul', 'required');
-        $this->form_validation->set_rules('slug', 'Slug', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required');
-        $this->form_validation->set_rules('version', 'Version', 'required');
-        $this->form_validation->set_rules('included', 'Included', 'required');
-        $this->form_validation->set_rules('demo', 'Demo', 'required');
-        $this->form_validation->set_rules('url', 'Url', 'required');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/tambah_page', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $config['upload_path']          = './assets/img/page-template/';
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 2048;
-
-            $this->load->library('upload', $config);
-
-
-            if (!$this->upload->do_upload('image')) {
-                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
-                Gambar belum ditambahkan </div>');
-                redirect('admin/page_template');
-            } else {
-                $gambar     = $this->upload->data();
-                $gambar     = $gambar['file_name'];
-                $judul      = $this->input->post('judul', true);
-                $slug       = $this->input->post('slug', true);
-                $harga      = $this->input->post('harga', true);
-                $version    = $this->input->post('version', true);
-                $included   = $this->input->post('included', true);
-                $demo       = $this->input->post('demo', true);
-                $url        = $this->input->post('url', true);
-
-                $data = [
-                    'judul'      => $judul,
-                    'image'      => $gambar,
-                    'slug'       => $slug,
-                    'harga'      => $harga,
-                    'version'    => $version,
-                    'included'   => $included,
-                    'demo'       => $demo,
-                    'url'        => $url,
-                    'created_at' => time(),
-                    'updated_at' => time()
-                ];
-
-                $this->db->insert('page_template', $data);
-                $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
-                Page Template sudah berhasil ditambahkan </div>');
-                redirect('admin/page_template');
-            }
-        }
-    }
-
-
-
-    public function edit_page($id)
-    {
-        $data['title'] = 'Edit Page';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $data['page_template'] = $this->db->get_where('page_template', ['id' => $id])->row_array();
-
-        // berikan rules untuk mengedit nama user
-        $this->form_validation->set_rules('judul', 'Judul', 'required');
-        $this->form_validation->set_rules('slug', 'Slug', 'required');
-        $this->form_validation->set_rules('harga', 'Harga', 'required');
-        $this->form_validation->set_rules('version', 'Version', 'required');
-        $this->form_validation->set_rules('included', 'Included', 'required');
-        $this->form_validation->set_rules('demo', 'Demo', 'required');
-        $this->form_validation->set_rules('url', 'Url', 'required');
-
-        // jalankan form validation
-        if ($this->form_validation->run() == false) {
-
-            $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('admin/edit_page', $data);
-            $this->load->view('templates/footer');
-        } else {
-            $judul      = $this->input->post('judul', true);
-            $slug       = $this->input->post('slug', true);
-            $harga      = $this->input->post('harga', true);
-            $version    = $this->input->post('version', true);
-            $included   = $this->input->post('included', true);
-            $demo       = $this->input->post('demo', true);
-            $url        = $this->input->post('url', true);
-
-            // cek jika ada gambar yang akan diupload
-            $upload_gambar = $_FILES['image']['name'];
-
-            if ($upload_gambar) {
-                $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                $config['max_size'] = 2048;
-                $config['upload_path'] = './assets/img/page-template/';
-
-                $this->load->library('upload', $config);
-
-                if ($this->upload->do_upload('image')) {
-                    // hapus gambar user lama
-                    $gambar_lama = $data['page_template']['image'];
-                    if ($gambar_lama != '') {
-                        unlink(FCPATH . '/assets/img/page-template/' . $gambar_lama);
-                    }
-
-                    // upload gambar user baru
-                    $gambar_baru = $this->upload->data('file_name');
-                    $this->db->set('image', $gambar_baru);
-                } else {
-                    echo $this->upload->display_errors();
-                }
-            }
-
-            $this->db->set('judul', $judul);
-            $this->db->set('slug', $slug);
-            $this->db->set('harga', $harga);
-            $this->db->set('version', $version);
-            $this->db->set('included', $included);
-            $this->db->set('demo', $demo);
-            $this->db->set('url', $url);
-            $this->db->where('id', $this->input->post('id'));
-            $this->db->update('page_template');
-
-            // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-            Data berhasil diubah! </div>');
-            redirect('admin/page_template');
-        }
-    }
-
-
 
     // metode pembayaran
     public function metode_pembayaran()
@@ -1437,7 +1289,7 @@ class Admin extends CI_Controller
             $this->db->update('pembayaran');
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Metode Pembayaran berhasil diubah! </div>');
             redirect('admin/metode_pembayaran');
         }
@@ -1577,7 +1429,7 @@ class Admin extends CI_Controller
             $this->db->update('download');
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
         Selamat, Data Download berhasil diubah! </div>');
             redirect('admin/download');
         }
@@ -1679,7 +1531,7 @@ class Admin extends CI_Controller
             $this->db->set('sharelok', $sharelok);
             $this->db->where('id', $this->input->post('id'));
             $this->db->update('lok_ultah');
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
     Logo Web anda berhasil diubah! </div>');
             redirect('admin/ultah_setting');
         }
@@ -1743,7 +1595,7 @@ class Admin extends CI_Controller
             $this->db->update('cover_ultah');
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
     Logo Web anda berhasil diubah! </div>');
             redirect('admin/ultah_setting');
         }

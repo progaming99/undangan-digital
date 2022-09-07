@@ -22,7 +22,7 @@
                                     <input type="hidden" name="id" value="<?= $ultah['id']; ?>">
                                     <div class="picture-container">
                                         <div class="picture">
-                                            <img src="<?= base_url('assets/images/pernikahan/') . $ultah['image']; ?>" class="picture-src" id="wizardPicturePreview">
+                                            <img src="<?= base_url('assets/images/ultah/') . $ultah['image']; ?>" class="picture-src" id="wizardPicturePreview">
                                             <input type="file" id="wizard-picture" name="image" class="">
                                         </div>
                                         <h6>Pilih Foto</h6>

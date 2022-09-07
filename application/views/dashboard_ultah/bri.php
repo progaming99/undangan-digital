@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<a href="<?= base_url('dashboardultah/status_pembayaran'); ?>" class="btn btn-info btn-icon-split">
+<a href="<?= base_url('DashboardUltah/status_pembayaran'); ?>" class="btn btn-info btn-icon-split">
     <span class="icon text-white-50">
         <i class="fas fa-info-circle"></i>
     </span>

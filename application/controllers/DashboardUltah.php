@@ -108,7 +108,8 @@ class DashboardUltah extends CI_Controller
             $data = [
                 'id_user'        => $id_user,
                 'nama_pengirim'        => $nama_pengirim,
-                'tanggal' => time()
+                'tanggal' => time(),
+                'status' => 'Menunggu Verifikasi'
             ];
 
             //cek jika ada gambar yang akan diupload
@@ -148,7 +149,7 @@ class DashboardUltah extends CI_Controller
             }
 
             // buat flash data agar memberi tahu user bahwa data berhasil diedit
-            $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Selamat, Pembayaran anda akan kami verifikasi, lihat undangan anda dengan cara masuk menu dasboard klik lihat undangan! </div>');
             redirect('dashboardultah/status_pembayaran');
         }
@@ -186,7 +187,7 @@ class DashboardUltah extends CI_Controller
             }
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
         Ulasan Kamu Berhasil Di Tambahkan!</div>');
-            redirect('dashboard_ultah/ulasan');
+            redirect('dashboardultah/ulasan');
         }
     }
 }

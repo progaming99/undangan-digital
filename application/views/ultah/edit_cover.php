@@ -28,7 +28,7 @@
                                         </div>
                                         Extensi File JPG, PNG, Ukuran Maksimal File 2MB
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-icon-split">
+                                    <button type="submit" class="btn btn-primary btn-icon-split col-lg">
                                         <span class="text"><i class="fas fa-check"></i> Simpan</span>
                                     </button>
                                 </form>

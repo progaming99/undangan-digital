@@ -22,8 +22,8 @@ class UUlangtahun extends CI_Controller
         $data['lokasi'] = $this->db->get('lok_ultah', ['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['musik_data'] = $this->db->get_where('musik_pernikahan', ['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['quotes'] = $this->db->get('quotes_ultah')->result_array();
-        $data['gallery'] = $this->db->get('gallery', ['id_user' => $this->session->userdata('id_user')])->row_array();
-        $data['hadiah'] = $this->db->get_where('hadiah', ['id_user'])->row_array();
+        $data['gallery'] = $this->db->get_where('gallery', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $data['hadiah'] = $this->db->get_where('hadiah', ['id_user' => $this->session->userdata('id_user')])->row_array();
         $data['hitung'] = $this->db->get_where('hitung_mundur', ['id_user' => $this->session->userdata('id_user')])->row_array();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');

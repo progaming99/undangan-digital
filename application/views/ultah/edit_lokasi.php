@@ -45,12 +45,12 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="small mb-1 ml-3">Tampilan Zona Waktu</div>
-                                            <select name="z_waktu" id="z_waktu" class="form-control" value="<?= $lokasi['z_waktu']; ?>">
-                                                <?php foreach ($zona as $z) : ?>
-                                                    <?php if ($z == $lokasi['zona']) : ?>
-                                                        <option value="<?= $z; ?>" selected><?= $z; ?></option>
+                                            <select name="z_waktu" id="z_waktu" class="form-control">
+                                                <?php foreach ($zona as $j) : ?>
+                                                    <?php if ($j == $lokasi['z_waktu']) : ?>
+                                                        <option value="<?= $j; ?>" selected><?= $j; ?></option>
                                                     <?php else : ?>
-                                                        <option value="<?= $z ?>"><?= $z; ?></option>
+                                                        <option value="<?= $j ?>"><?= $j; ?></option>
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
                                             </select>

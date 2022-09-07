@@ -22,9 +22,9 @@
                                 <div class="card-body">
                                     Metode Pembayaran
                                     <br>
-                                    <a href="<?= base_url('dashboardultah/shopeepay'); ?>" class="mb-1"> <img src="<?= base_url('assets/images/shopee.png'); ?>" alt="" width="40px" class="mb-3"></a> ShopeePay
+                                    <a href="<?= base_url('DashboardUltah/shopeepay'); ?>" class="mb-1"> <img src="<?= base_url('assets/images/shopee.png'); ?>" alt="" width="40px" class="mb-3"></a> ShopeePay
                                     <br>
-                                    <a href="<?= base_url('dashboardultah/bri'); ?>"> <img src="<?= base_url('assets/images/bri.png'); ?>" alt="" width="30px"></a> Bank BRI
+                                    <a href="<?= base_url('DashboardUltah/bri'); ?>"> <img src="<?= base_url('assets/images/bri.png'); ?>" alt="" width="30px"></a> Bank BRI
                                 </div>
                             </div>
                         </div>

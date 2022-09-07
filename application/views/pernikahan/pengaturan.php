@@ -93,4 +93,14 @@
             </div>
         </a>
     </div>
+    <div class="col-6 col-md-6 mb-3 col-lg-3">
+        <a href="<?= base_url('Pernikahan/desain/'); ?>" class="card h-100 mb-0">
+            <div class="card-body text-center">
+                <div class="mb-1">
+                    <img src="<?= base_url('assets/images/cover.jpg'); ?>" height="72" width="72">
+                </div>
+                <h6>Desain</h6>
+            </div>
+        </a>
+    </div>
 </div>

@@ -7,23 +7,21 @@
                     <div class="row">
                         <div class="col-lg">
                             <div class="p-1">
-                                <div class="col-lg mb-4">
-                                    <!-- Illustrations -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-1">
-                                            <h6 class="m-0 font-weight-bold text-primary">Data Mempelai Pria</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="m-0 font-weight-bold text-gray-800">Informasi</p>
-                                            <p>Disarankan untuk melakukan kompresi pada foto yang akan diunggah, ukuran maksimal per file foto adalah 2MB</p>
-                                        </div>
+                                <!-- Illustrations -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-1">
+                                        <h6 class="m-0 font-weight-bold text-primary">Data Mempelai Pria</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="m-0 font-weight-bold text-gray-800">Informasi</p>
+                                        <p>Disarankan untuk melakukan kompresi pada foto yang akan diunggah, ukuran maksimal per file foto adalah 2MB</p>
                                     </div>
                                 </div>
                                 <form class="user" action="" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $nama['id']; ?>">
                                     <div class="picture-container">
                                         <div class="picture">
-                                            <img src="<?= base_url('assets/images/pernikahan/pria.jpg') . $nama['image']; ?>" class="picture-src" id="wizardPicturePreview">
+                                            <img src="<?= base_url('assets/images/pernikahan/') . $nama['image']; ?>" class="picture-src" id="wizardPicturePreview">
                                             <input type="file" id="wizard-picture" name="image" class="">
                                         </div>
                                         <h6>Pilih Foto</h6>

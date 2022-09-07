@@ -29,16 +29,10 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="<?= base_url('pernikahan/pengaturan'); ?>">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pengaturan</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">List:</h6>
-                <a class="collapse-item" href="<?= base_url('pernikahan/pengaturan'); ?>">Menu</a>
-            </div>
-        </div>
     </li>
 
     <!-- Heading -->

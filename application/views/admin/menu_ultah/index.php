@@ -1,10 +1,10 @@
+<?= $this->session->flashdata('pesan'); ?>.
 <?php if ($this->session->flashdata('flash')) : ?>
     <div class="row mt-3">
         <div class="col-md-6">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 Data Ulang Tahun
                 <strong>berhasil</strong>
-                <?= $this->session->flashdata('flash'); ?>.
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </div>

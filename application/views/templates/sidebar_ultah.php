@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="<?= base_url('dashboardultah/akhir'); ?>">
+        <a class="nav-link" href="<?= base_url('DashboardUltah/akhir'); ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -28,25 +28,25 @@
     </div>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="<?= base_url('ulangtahun/pengaturan'); ?>">
+        <a class="nav-link pb-0" href="<?= base_url('UlangTahun/pengaturan'); ?>">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pengaturan</span>
         </a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('dashboardultah/upgrade_paket'); ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link pb-0" href="<?= base_url('DashboardUltah/upgrade_paket'); ?>">
+            <i class="fa-solid fa-cash-register"></i>
             <span>Upgrade Paket</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('dashboardultah/status_pembayaran'); ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link pb-0" href="<?= base_url('DashboardUltah/status_pembayaran'); ?>">
+            <i class="fa-solid fa-file-invoice"></i>
             <span>Status Pembayaran</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('dashboardultah/ulasan'); ?>">
-            <i class="fas fa-fw fa-chart-area"></i>
+        <a class="nav-link pb-0" href="<?= base_url('DashboardUltah/ulasan'); ?>">
+            <i class="fa-regular fa-comment-dots"></i>
             <span>Kirim Masukan</span></a>
     </li>
 </ul>

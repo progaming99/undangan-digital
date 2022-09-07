@@ -11,22 +11,14 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
-        $cekUser = $this->db->get_where('nm_mempelai', ['id_user' => $this->session->userdata('id_user')])->num_rows();
-
-        if ($cekUser > 0) {
-            return $this->akhir();
-        }
-
         $data['title'] = 'Beranda';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar_dash', $data);
         $this->load->view('templates//topbar_user', $data);
         $this->load->view('dashboard/index', $data);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer_akses');
     }
 
     public function akhir()

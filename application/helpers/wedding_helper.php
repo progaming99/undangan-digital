@@ -34,3 +34,16 @@ function check_access($role_id, $menu_id)
         return "checked='checked'";
     }
 }
+
+function cek_akses($user_id, $menu_id)
+{
+    $ci = get_instance();
+
+    $ci->db->where('user_id', $user_id);
+    $ci->db->where('menu_id', $menu_id);
+
+    $result = $ci->db->get('user_access_menu');
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}

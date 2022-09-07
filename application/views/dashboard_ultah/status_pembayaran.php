@@ -13,7 +13,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="col-lg mt-5">
-                                                <form class="user" action="<?= base_url('dashboardultah/status_pembayaran'); ?>" method="POST" enctype="multipart/form-data">
+                                                <form class="user" action="<?= base_url('DashboardUltah/status_pembayaran'); ?>" method="POST" enctype="multipart/form-data">
                                                     <div class="picture-container">
                                                         <div class="picture">
                                                             <img src="<?= base_url('assets/images/nota.png'); ?>" class="picture-src" id="wizardPicturePreview">

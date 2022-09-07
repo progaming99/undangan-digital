@@ -1,3 +1,4 @@
+<?= $this->session->flashdata('pesan'); ?>
 <div class="col-lg mb-4">
     <!-- Illustrations -->
     <div class="card shadow mb-4">
@@ -12,7 +13,7 @@
                 <br>Gunakan menu pengaturan untuk mengubah informasi undangan digital, mengubah informasi dasar, lokasi, musik dan lainnya.
             </p>
             <div class="my-2"></div>
-            <a href="<?= base_url('uulangtahun'); ?>" class="btn btn-success btn-icon-split col-lg">
+            <a href="<?= base_url('UUlangtahun'); ?>" class="btn btn-success btn-icon-split col-lg">
                 <span class="text"><i class="fas fa-cake-candles"></i> Undangan Ulang Tahun</span>
             </a>
         </div>

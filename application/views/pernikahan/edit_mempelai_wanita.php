@@ -1,28 +1,26 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-7">
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card o-hidden border-0 shadow-lg my-0">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg">
-                            <div class="p-5">
-                                <div class="col-lg mb-4">
-                                    <!-- Illustrations -->
-                                    <div class="card shadow mb-4">
-                                        <div class="card-header py-1">
-                                            <h6 class="m-0 font-weight-bold text-primary">Informasi</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>Disarankan untuk melakukan kompresi pada foto yang akan diunggah, ukuran maksimal per file foto adalah 2MB</p>
-                                        </div>
+                            <div class="p-1">
+                                <!-- Illustrations -->
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-1">
+                                        <h6 class="m-0 font-weight-bold text-primary">Informasi</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>Disarankan untuk melakukan kompresi pada foto yang akan diunggah, ukuran maksimal per file foto adalah 2MB</p>
                                     </div>
                                 </div>
                                 <form class="user" action="" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?= $nama['id']; ?>">
                                     <div class="picture-container">
                                         <div class="picture">
-                                            <img src="<?= base_url('assets/images/pernikahan/wanita.jpg') . $nama['image2']; ?>" class="picture-src" id="wizardPicturePreview">
+                                            <img src="<?= base_url('assets/images/pernikahan/') . $nama['image2']; ?>" class="picture-src" id="wizardPicturePreview">
                                             <input type="file" id="wizard-picture" name="image2" class="">
                                         </div>
                                         <h6>Pilih Foto</h6>

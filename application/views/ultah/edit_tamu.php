@@ -12,7 +12,7 @@
                                         <h6 class="m-0 font-weight-bold text-primary">Tamu Undangan</h6>
                                     </div>
                                     <div class="card-body">
-                                        <form class="user" action="<?= base_url('ulangtahun/edit_tamu/') . $list['id']; ?>" method="POST" enctype="multipart/form-data">
+                                        <form class="user" action="<?= base_url('UlangTahun/edit_tamu/') . $list['id']; ?>" method="POST" enctype="multipart/form-data">
                                             <input type="hidden" name="id" value="<?= $list['id']; ?>">
                                             <div class="form-group">
                                                 <div class="small mb-1 ml-3">Nama Tamu</div>
@@ -34,7 +34,7 @@
         </div>
     </div>
 </div>
-
+<!-- 
 <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
 
 <script>
@@ -43,4 +43,4 @@
         pesan += '%0A %0A %0A http://localhost/kreativa2/pernikahan/hasil'
         window.open('https://api.whatsapp.com/send/?phone=6285742144699&text=' + pesan, '_blank');
     }
-</script>
+</script> -->
