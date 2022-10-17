@@ -83,6 +83,7 @@
     // ajax untuk menentukan role (ketentuan pengelola menu)
     $('.form-check-input').on('click', function() {
         const menuId = $(this).data('menu');
+        const userId = $(this).data('role_id');
         const roleId = $(this).data('role');
 
         $.ajax({
@@ -90,6 +91,7 @@
             type: 'post',
             data: {
                 menuId: menuId,
+                userId: userId,
                 roleId: roleId
             },
             success: function() {

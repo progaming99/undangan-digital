@@ -65,7 +65,7 @@ class User_Admin extends CI_Controller
                 if ($this->upload->do_upload('image')) {
                     // hapus gambar user lama
                     $gambar_lama = $data['user']['image'];
-                    if ($gambar_lama != 'default.png') {
+                    if ($gambar_lama != 'default.jpg') {
                         unlink(FCPATH . 'assets/img/profile/' . $gambar_lama);
                     }
 

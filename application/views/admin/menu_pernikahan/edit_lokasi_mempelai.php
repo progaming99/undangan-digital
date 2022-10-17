@@ -37,9 +37,9 @@
             </div>
             <div class="form-group">
                 <div class="small mb-1 ml-3">Tampilan Zona Waktu</div>
-                <select name="z_waktu" id="z_waktu" class="form-control form-control-user" value="<?= $lokasi['z_waktu']; ?>">
-                    <?php foreach ($zona as $z) : ?>
-                        <?php if ($z == $lokasi['zona']) : ?>
+                <select name="z_waktu" id="z_waktu" class="form-control" value="<?= $lokasi['z_waktu']; ?>">
+                    <?php foreach ($z_waktu as $z) : ?>
+                        <?php if ($z == $lokasi['z_waktu']) : ?>
                             <option value="<?= $z; ?>" selected><?= $z; ?></option>
                         <?php else : ?>
                             <option value="<?= $z ?>"><?= $z; ?></option>
@@ -88,16 +88,16 @@
             </div>
             <div class="form-group">
                 <div class="small mb-1 ml-3">Tampilan Zona Waktu</div>
-                <select name="z_waktu2" id="z_waktu2" class="form-control form-control-user" value="<?= $lokasi['z_waktu2']; ?>">
-                    <?php foreach ($zona as $z) : ?>
-                        <?php if ($z == $lokasi['zona']) : ?>
+                <select name="z_waktu2" id="z_waktu2" class="form-control" value="<?= $lokasi['z_waktu2']; ?>">
+                    <?php foreach ($z_waktu as $z) : ?>
+                        <?php if ($z == $lokasi['z_waktu2']) : ?>
                             <option value="<?= $z; ?>" selected><?= $z; ?></option>
                         <?php else : ?>
                             <option value="<?= $z ?>"><?= $z; ?></option>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </select>
-                <?= form_error('z_waktu2', '<small class="text-danger pl-3">', '</small>'); ?>
+                <?= form_error('z_waktu', '<small class="text-danger pl-3">', '</small>'); ?>
             </div>
         </div>
     </div>

@@ -59,10 +59,20 @@
     <hr class="sidebar-divider">
 
     <div class="sidebar-heading">
-        Lainnya
+        Halal bi Halal
     </div>
     <li class="nav-item">
-        <a class="nav-link pb-0" href="<?= base_url('Admin/daftar_lainnya') ?>">
+        <a class="nav-link pb-0" href="<?= base_url('Admin/daftar_halal') ?>">
+            <i class="fa-solid fa-address-card" data-dismiss="modal"></i>
+            <span>Daftar User</span></a>
+    </li>
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Syukuran
+    </div>
+    <li class="nav-item">
+        <a class="nav-link pb-0" href="<?= base_url('Admin/daftar_syukuran') ?>">
             <i class="fa-solid fa-address-card" data-dismiss="modal"></i>
             <span>Daftar User</span></a>
     </li>

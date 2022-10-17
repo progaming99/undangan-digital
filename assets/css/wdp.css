@@ -1,0 +1,651 @@
+/*start-countdown*/
+.wpkoi-elements-countdown-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: table;
+    table-layout: fixed;
+    width: 100%
+}
+
+.wpkoi-elements-countdown-items>li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: table-cell;
+    position: relative
+}
+
+.wpkoi-elements-countdown-item>div {
+    text-align: center;
+    padding: 20px
+}
+
+.wpkoi-elements-countdown-label-block .wpkoi-elements-countdown-digits,
+.wpkoi-elements-countdown-label-block .wpkoi-elements-countdown-label {
+    display: block;
+    text-align: center
+}
+
+.wpkoi-elements-countdown-digits {
+    font-size: 50px;
+    line-height: 1
+}
+
+.wpkoi-elements-countdown-label {
+    font-size: 18px;
+    line-height: 1;
+    color: #fff
+}
+
+.wpkoi-elements-countdown-show-separator .wpkoi-elements-countdown-digits::after {
+    content: ":";
+    position: absolute;
+    left: 98%;
+    z-index: 9999
+}
+
+.wpkoi-elements-countdown-item:last-child .wpkoi-elements-countdown-digits::after {
+    display: none
+}
+
+.wpkoi-elements-countdown-items .wpkoi-elements-countdown-item>div {
+    background: #111
+}
+/*end-countdown*/
+
+/*start-guestbook*/
+.guestbook-list {
+    text-align: left;
+    font-size: 14px !important;
+    width: 100%;
+    padding: 5px 15px 0 0;
+    height: 270px;
+    overflow: auto;
+    margin-top: 40px
+}
+
+.user-guestbook {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px
+}
+
+.user-guestbook img {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    height: 40px;
+    right: 10px;
+    overflow: hidden;
+    top: 0;
+    width: 40px
+}
+
+.guestbook-name {
+    font-size: 12px;
+    color: #acb4c2;
+    text-decoration: none !important;
+    -webkit-transition: 300ms color;
+    -moz-transition: 300ms color;
+    -ms-transition: 300ms color;
+    -o-transition: 300ms color;
+    transition: 300ms color
+}
+
+.guestbook-name a {
+    text-decoration: none !important;
+}
+
+.guestbook-message {
+    font-size: 15px;
+    color: #555f77;
+    font-weight: 600
+}
+
+.guestbook {
+    flex: 1;
+    display: block;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+    margin-left: 15px;
+    min-height: 60px;
+    position: relative;
+    padding: 8px;
+    position: relative;
+    margin-bottom: 10px
+}
+
+.guestbook:before {
+    border-color: transparent rgba(0, 0, 0, .05);
+    top: 22px
+}
+
+.guestbook:after,
+.guestbook:before {
+    border-width: 10px 10px 10px 0;
+    border-style: solid;
+    border-color: transparent #fcfcfc;
+    content: "";
+    left: -7px;
+    position: absolute;
+    top: 9px
+}
+
+input[type="text"].form-control,
+textarea.form-control {
+    display: block;
+    width: 100%;
+    background-color: #fcfcfc;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+    color: #555f77;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    outline: 0;
+    width: 100%;
+    -webkit-transition: 300ms box-shadow;
+    -moz-transition: 300ms box-shadow;
+    -ms-transition: 300ms box-shadow;
+    -o-transition: 300ms box-shadow;
+    transition: 300ms box-shadow
+}
+
+input[type="text"].form-control,
+select.form-control {
+    display: block;
+    width: 100%;
+    background-color: #fcfcfc;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+    color: #555f77;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 15px;
+    outline: 0;
+    width: 100%;
+    -webkit-transition: 300ms box-shadow;
+    -moz-transition: 300ms box-shadow;
+    -ms-transition: 300ms box-shadow;
+    -o-transition: 300ms box-shadow;
+    transition: 300ms box-shadow
+}
+
+#post-guestbook-box input[type="submit"] {
+    color: #f8f9fa;
+    display: inline-block;
+    background-color: #555f77;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .15);
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    margin-top: 20px;
+    outline: 0;
+    padding: 6px 15px;
+    -webkit-transition: 300ms box-shadow;
+    -moz-transition: 300ms box-shadow;
+    -ms-transition: 300ms box-shadow;
+    -o-transition: 300ms box-shadow;
+    transition: 300ms box-shadow
+}
+
+.guestbook-label {
+    text-align: left;
+    font-family: inherit;
+    font-size: 12px
+}
+
+.elementor-wdp-form-wrapper {
+    text-align: center;
+    line-height: 1.7
+}
+
+.elementor-wdp-form-wrapper form {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left
+}
+
+@media (min-width:300px) {
+    .elementor-wdp-form-wrapper form {
+        width: 100%
+    }
+}
+
+.elementor-wdp-form-wrapper label {
+    display: block
+}
+
+.elementor-wdp-form-wrapper .contact-form input[type="email"],
+.elementor-wdp-form-wrapper .contact-form input[type="text"],
+.elementor-wdp-form-wrapper .contact-form textarea,
+.elementor-wdp-form-wrapper input[type="email"],
+.elementor-wdp-form-wrapper input[type="text"],
+.elementor-wdp-form-wrapper textarea {
+    /*min-width: 300px;*/
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 11px 20px;
+    border: 0;
+    background: #f7f7f7;
+    line-height: 1
+}
+
+@media (min-width:300px) {
+    .elementor-wdp-form-wrapper .contact-form input[type="email"],
+    .elementor-wdp-form-wrapper .contact-form input[type="text"],
+    .elementor-wdp-form-wrapper .contact-form textarea,
+    .elementor-wdp-form-wrapper input[type="email"],
+    .elementor-wdp-form-wrapper input[type="text"],
+    .elementor-wdp-form-wrapper textarea {
+        min-width: 100%
+    }
+}
+
+.elementor-wdp-form-wrapper input[type="file"],
+.elementor-wdp-form-wrapper select {
+    margin: 0 0 10px
+}
+
+.elementor-wdp-form-wrapper button,
+.elementor-wdp-form-wrapper input[type="submit"] {
+    padding: 12px 24px;
+    border: 0;
+    color: #fff;
+    line-height: 1;
+    text-align: center
+}
+
+.elementor-wdp-form-wrapper dd,
+.elementor-wdp-form-wrapper dl {
+    margin: 0;
+    padding: 0
+}
+
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form {
+    text-align: center
+}
+
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline br,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline label {
+    display: none
+}
+
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form button,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form dd,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form div,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form dl,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form input[type="email"],
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form input[type="submit"],
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form input[type="text"],
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form label,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-inline form textarea {
+    display: inline-block
+}
+
+.elementor-wdp-form-wrapper.elementor-button-width-input button,
+.elementor-wdp-form-wrapper.elementor-button-width-input input[type="submit"],
+.elementor-wdp-form-wrapper.elementor-wdp-form-button-align-fullwidth button,
+.elementor-wdp-form-wrapper.elementor-wdp-form-button-align-fullwidth input[type="submit"] {
+    /*min-width: 300px;*/
+    width: 100%
+}
+
+.elementor-wdp-form-wrapper.elementor-wdp-form-button-align-left .wdp-form-field-submit {
+    text-align: left
+}
+
+.elementor-wdp-form-wrapper.elementor-wdp-form-button-align-right .wdp-form-field-submit {
+    text-align: right
+}
+
+@media (min-width:300px) {
+    .elementor-wdp-form-wrapper.elementor-button-width-input button,
+    .elementor-wdp-form-wrapper.elementor-button-width-input input[type="submit"] {
+        min-width: 100%
+    }
+}
+
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-fullwidth div,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-fullwidth form,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-fullwidth input[type="email"],
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-fullwidth input[type="text"],
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-fullwidth label,
+.elementor-wdp-form-wrapper.elementor-wdp-form-display-fullwidth textarea {
+    display: block;
+    width: 100%
+}
+
+.elementor-wdp-form-wrapper.elementor-button-width-input.elementor-wdp-form-display-fullwidth button,
+.elementor-wdp-form-wrapper.elementor-button-width-input.elementor-wdp-form-display-fullwidth input[type="submit"],
+.elementor-wdp-form-wrapper.elementor-wdp-form-button-align-fullwidth.elementor-wdp-form-display-fullwidth button,
+.elementor-wdp-form-wrapper.elementor-wdp-form-button-align-fullwidth.elementor-wdp-form-display-fullwidth input[type="submit"] {
+    display: block;
+    width: 100%
+}
+
+.wdp-form-field-important,
+.wdp-form-field-important input,
+.wdp-form-field-important label {
+    display: none !important
+}
+
+label {
+    line-height: 1.7
+}
+
+.wdp-form-field-submit {
+    padding-top: 8px
+}
+
+.modalx {
+    position: fixed;
+    z-index: 2000;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: translateY(0)
+}
+
+.overlayy {
+    background-color: #000;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2001;
+    top: 0;
+    opacity: .7;
+    left: 0
+}
+
+.content-modalx {
+    background-color: transparent;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 2002;
+    top: 10px;
+    color: #fff;
+    left: 0
+}
+
+.info_modalx {
+    width: 100%;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center
+}
+
+.info_modalx>div {
+    width: 100%;
+    text-align: center;
+    height: auto
+}
+
+.removeModals {
+    transform: translateY(200%);
+    transition: 0.4s ease-in-out
+}
+
+.wdp-text {
+    color: #fff;
+    font-size: 18px;
+    text-align: center
+}
+
+.wdp-dear {
+    color: #fff;
+    font-size: 18px;
+    text-align: center
+}
+
+.wdp-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 25px
+}
+
+.wdp-form-wrapper-kit {
+    /*text-align:center;*/
+    line-height: 1.7
+}
+
+.wdp-form-wrapper-kit form {
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left
+}
+
+@media (min-width:300px) {
+    .wdp-form-wrapper-kit form {
+        width: 100%
+    }
+}
+
+.wdp-form-wrapper-kit label {
+    display: block
+}
+
+.wdp-form-wrapper-kit .contact-form input[type="email"],
+.wdp-form-wrapper-kit .contact-form input[type="text"],
+.wdp-form-wrapper-kit .contact-form textarea,
+.wdp-form-wrapper-kit input[type="email"],
+.wdp-form-wrapper-kit input[type="text"],
+.wdp-form-wrapper-kit textarea {
+    /*min-width: 300px;*/
+    width: 100%;
+    margin: 0 0 10px;
+    padding: 11px 20px;
+    border: 0;
+    background: #f7f7f7;
+    line-height: 1
+}
+
+@media (min-width:300px) {
+    .wdp-form-wrapper-kit .contact-form input[type="email"],
+    .wdp-form-wrapper-kit .contact-form input[type="text"],
+    .wdp-form-wrapper-kit .contact-form textarea,
+    .wdp-form-wrapper-kit input[type="email"],
+    .wdp-form-wrapper-kit input[type="text"],
+    .wdp-form-wrapper-kit textarea {
+        min-width: 100%
+    }
+}
+
+.wdp-form-wrapper-kit input[type="file"],
+.wdp-form-wrapper-kit select {
+    margin: 0 0 10px
+}
+
+.wdp-form-wrapper-kit button,
+.wdp-form-wrapper-kit input[type="submit"] {
+    padding: 12px 24px;
+    border: 0;
+    color: #fff;
+    line-height: 1;
+    text-align: center
+}
+
+.wdp-form-wrapper-kit dd,
+.wdp-form-wrapper-kit dl {
+    margin: 0;
+    padding: 0
+}
+
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form {
+    text-align: center
+}
+
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline br,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline label {
+    display: none
+}
+
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form button,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form dd,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form div,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form dl,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form input[type="email"],
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form input[type="submit"],
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form input[type="text"],
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form label,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-inline form textarea {
+    display: inline-block
+}
+
+.wdp-form-wrapper-kit.elementor-button-width-input button,
+.wdp-form-wrapper-kit.elementor-button-width-input input[type="submit"],
+.wdp-form-wrapper-kit.elementor-wdp-form-button-align-fullwidth button,
+.wdp-form-wrapper-kit.elementor-wdp-form-button-align-fullwidth input[type="submit"] {
+    /*min-width: 300px;*/
+    width: 100%
+}
+
+.wdp-form-wrapper-kit.elementor-wdp-form-button-align-left .wdp-form-field-submit {
+    text-align: left
+}
+
+.wdp-form-wrapper-kit.elementor-wdp-form-button-align-right .wdp-form-field-submit {
+    text-align: right
+}
+
+@media (min-width:300px) {
+    .wdp-form-wrapper-kit.elementor-button-width-input button,
+    .wdp-form-wrapper-kit.elementor-button-width-input input[type="submit"] {
+        min-width: 100%
+    }
+}
+
+.wdp-form-wrapper-kit.elementor-wdp-form-display-fullwidth div,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-fullwidth form,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-fullwidth input[type="email"],
+.wdp-form-wrapper-kit.elementor-wdp-form-display-fullwidth input[type="text"],
+.wdp-form-wrapper-kit.elementor-wdp-form-display-fullwidth label,
+.wdp-form-wrapper-kit.elementor-wdp-form-display-fullwidth textarea {
+    display: block;
+    width: 100%
+}
+
+.wdp-form-wrapper-kit.elementor-button-width-input.elementor-wdp-form-display-fullwidth button,
+.wdp-form-wrapper-kit.elementor-button-width-input.elementor-wdp-form-display-fullwidth input[type="submit"],
+.wdp-form-wrapper-kit.elementor-wdp-form-button-align-fullwidth.elementor-wdp-form-display-fullwidth button,
+.wdp-form-wrapper-kit.elementor-wdp-form-button-align-fullwidth.elementor-wdp-form-display-fullwidth input[type="submit"] {
+    display: block;
+    width: 100%
+}
+
+.wdp-form-field-important,
+.wdp-form-field-important input,
+.wdp-form-field-important label {
+    display: none !important
+}
+
+label {
+    line-height: 1.7
+}
+
+.wdp-form-field-submit {
+    padding-top: 8px
+}
+
+.wdp-notice-copy {
+    color: #0bc82e;
+    margin-top: 22px;
+    width: max-content;
+    padding: 5px;
+    border-radius: 3px
+}
+
+.wdp-mempelai {
+    color: #fff; 
+    font-size:14px;
+}
+
+
+.elementor-button-wrapper {
+    margin-top: 15px;
+    margin-bottom: 10px
+}
+
+.wdp-confirm {
+    color: #fff;
+    margin-left: 4px;
+    border-radius: 3px;
+    background: #c18c14;
+    font-size: .7em;
+    padding-bottom: 3px !important;
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+    padding-top: 2px !important
+}
+
+.wdp-sticky-section-yes {
+    position: fixed !important;
+    z-index: 99;
+    width: 100%;
+    left: 0;
+}
+
+.wdp-sticky-section-positon-top {
+    position: fixed !important;
+    z-index: 99;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.wdp-sticky-section-positon-bottom {
+    position: fixed !important;
+    z-index: 99;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.wdp-column-sticky .inner-wrapper-sticky {
+    width: 100%;
+}
+
+.wdp-form-nama {
+    float: left;
+}
+.wdp-qrcode-copy {
+    color: #0bc82e;
+    margin-top: 5px;
+    text-align:center;
+    padding: 5px;
+}
+.qrcode-button {
+    float: left;
+}
+.qrcode-text {
+    display: block;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+.wdp-center {
+    display: block;
+    text-align:center;
+}
+.wdp-qrcode-center {
+    text-align:center;
+    padding-top: 10px;
+}
+.qrcode-show {
+    padding-top: 70px;
+    display: block;
+}

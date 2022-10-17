@@ -155,8 +155,11 @@ class Menu extends CI_Controller
     {
         $data['title'] = 'Edit Pembayaran';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['pembayaran'] = $this->Menu_model->getStatusById($id);
+
+        // $data['pembayaran'] = $this->Menu_model->getStatusById($id);
+        $data['pembayaran'] = $this->Menu_model->getEditPembayaran($id);
         $data['status'] = ['Menunggu Pembayaran', 'Lunas'];
+        $data['role_id'] = ['2', '3'];
 
         $this->form_validation->set_rules('status', 'Status Pembayaran', 'required');
 
@@ -168,6 +171,7 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->Menu_model->editPembayaran();
+            $this->Menu_model->EditRoleUser();
             $this->session->set_flashdata('flash', 'Diedit');
             redirect('menu/status_pembayaran');
         }

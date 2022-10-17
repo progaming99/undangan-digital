@@ -1,4 +1,3 @@
-<?= $this->session->flashdata('pesan'); ?>.
 <?php if ($this->session->flashdata('flash')) : ?>
     <div class="row mt-3">
         <div class="col-md-6">

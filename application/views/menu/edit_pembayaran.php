@@ -23,6 +23,23 @@
                 </select>
                 <?= form_error('status', '<small class="text-danger pl-3">', '</small>'); ?>
             </div>
+
+            <div class="form-group">
+                <div class="small mb-1 ml-3">Akses User</div>
+                <div class="small mb-1 ml-3">2 => Belum bayar</div>
+                <div class="small mb-1 ml-3">3 => Sudah bayar</div>
+                <select name="role_id" id="role_id" class="form-control form-control-user" value="<?= $pembayaran['role_id']; ?>">
+                    <?php foreach ($role_id as $s) : ?>
+                        <?php if ($s == $pembayaran['role_id']) : ?>
+                            <option value="<?= $s; ?>" selected><?= $s; ?></option>
+                        <?php else : ?>
+                            <option value="<?= $s ?>"><?= $s; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+                <?= form_error('role_id', '<small class="text-danger pl-3">', '</small>'); ?>
+            </div>
+
         </div>
     </div>
     <button type="submit" class="btn btn-primary btn-user btn-block ml-3 mr-3">

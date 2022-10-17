@@ -7,7 +7,7 @@
                 <div class="row mb-2">
                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nama" value="<?= $musik_data['nama']; ?>">
+                        <input type="text" class="form-control" name="nama" value="<?= $musik_data['musik']; ?>">
                         <?= form_error('name', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>

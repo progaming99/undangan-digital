@@ -15,6 +15,7 @@ class UUlangtahun extends CI_Controller
             'title' => 'UNDANGAN DIGITAL',
             'nm_tamu' => $this->input->get('to'),
         ];
+
         error_reporting(0);
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['nama'] = $this->db->get_where('nm_ultah', ['id_user' => $this->session->userdata('id_user')])->row_array();
@@ -31,7 +32,7 @@ class UUlangtahun extends CI_Controller
         $this->form_validation->set_rules('hadir_tidak', 'Hadir/Tidak', 'required');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('ultah/undangan', $data);
+            $this->pilihTemplate($data);
         } else {
             $nama = $this->input->post('nama', true);
             $ucapan = $this->input->post('ucapan', true);
@@ -44,7 +45,21 @@ class UUlangtahun extends CI_Controller
             ];
 
             $this->db->insert('quotes_ultah', $data);
-            redirect('uulangtahun');
+            redirect('UUlangtahun');
+        }
+    }
+
+    function pilihTemplate($data)
+    {
+        $id_user = $this->session->userdata('id_user');
+        $cek = $this->db->get_where('template_user', ['id_user' => $id_user])->row();
+
+        if ($cek) {
+            $get = $this->db->select('b.slug')->from('template_user a')->join('template_pernikahan b', 'a.id_template = b.id', 'left')->where('a.id_user', $id_user)->get()->row();
+            $template = $get->slug;
+            return $this->load->view("ultah/desain/$template");
+        } else {
+            return $this->load->view("ultah/desain/undangan");
         }
     }
 }

@@ -16,7 +16,7 @@
                     <div class="card-body">
                         Pembayaran anda belum terverifikasi, tunggu pembayaran anda diverifikasi oleh admin, dan periksa pembyaran anda pada menu cek status pembayaran!
                         <br>
-                        <a href="<?= base_url('dashboard/metode_pembayaran'); ?>">&larr; Bayar</a>
+                        <a href="">&larr; Bayar</a>
                     </div>
                 </div>
             </div>

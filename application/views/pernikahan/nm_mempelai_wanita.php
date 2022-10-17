@@ -48,6 +48,11 @@
                                         <?= form_error('ni_wanita', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                     <div class="form-group">
+                                        <div class="small mb-1 ml-3">Urutan Anak</div>
+                                        <input type="text" class="form-control form-control-user" id="urutan_wanita" name="urutan_wanita" placeholder="Anak ke berapa?" value="<?= set_value('urutan_wanita'); ?>">
+                                        <?= form_error('urutan_wanita', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                    <div class="form-group">
                                         <div class="small mb-1 ml-3">Username Instagram</div>
                                         <input type="text" class="form-control form-control-user" id="i_wanita" name="i_wanita" placeholder="Instagram" value="<?= $nama['i_wanita']; ?>">
                                         <?= form_error('i_wanita', '<small class="text-danger pl-3">', '</small>'); ?>

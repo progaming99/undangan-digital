@@ -37,11 +37,8 @@
                             <td><?= date('d F Y', $l['tanggal']); ?></td>
                             <td><?= $l['status']; ?></td>
                             <td>
-                                <a href="<?= base_url(); ?>Admin/user_akses/<?= $l['id']; ?>" class="btn btn-success btn-circle">
-                                    ACC
-                                </a>
                                 <a href="<?= base_url(); ?>Menu/edit_pembayaran/<?= $l['id']; ?>" class="btn btn-warning btn-circle">
-                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <a href="<?= base_url(); ?>Menu/hapus_user/<?= $l['id']; ?>" class="btn btn-danger btn-circle" onclick="return confirm('Apa anda yakin?');">
                                     <i class="fas fa-trash"></i>

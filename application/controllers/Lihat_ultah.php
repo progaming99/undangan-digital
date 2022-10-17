@@ -18,6 +18,6 @@ class Lihat_ultah extends CI_Controller
         $data['hadiah'] = $this->db->get_where('hadiah', ['id_user'])->row_array();
         $data['hitung'] = $this->db->get_where('hitung_mundur')->row_array();
 
-        $this->load->view('pernikahan/undangan', $data);
+        $this->load->view('ultah/desain/undangan', $data);
     }
 }

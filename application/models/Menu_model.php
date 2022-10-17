@@ -55,7 +55,7 @@ class Menu_model extends CI_Model
         return $query;
     }
 
-    public function getStatusByid($id)
+    public function getEditPembayaran($id)
     {
         return $this->db->get_where('pembayaran', ['id_user' => $id])->row_array();
     }
@@ -64,10 +64,20 @@ class Menu_model extends CI_Model
     {
         $data = [
             "nama_pengirim" => $this->input->post('nama_pengirim', true),
-            "status" => $this->input->post('status', true)
+            "status" => $this->input->post('status', true),
         ];
 
         $this->db->where('id_user', $this->input->post('id'));
         $this->db->update('pembayaran', $data);
+    }
+
+    public function EditRoleUser()
+    {
+        $data = [
+            "role_id" => $this->input->post('role_id', true),
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('user', $data);
     }
 }

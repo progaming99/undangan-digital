@@ -25,7 +25,8 @@ class Pernikahan_model extends CI_Model
             "tgl_pernikahan2" => $this->input->post('tgl_pernikahan2', true),
             "w_mulai2" => $this->input->post('w_mulai2', true),
             "w_selesai2" => $this->input->post('w_selesai2', true),
-            "z_waktu2" => $this->input->post('z_waktu2', true)
+            "z_waktu2" => $this->input->post('z_waktu2', true),
+            "sharelok" => $this->input->post('sharelok', true)
         ];
 
         $this->db->where('id', $this->input->post('id'));
@@ -60,7 +61,8 @@ class Pernikahan_model extends CI_Model
     public function editDataList($id)
     {
         $data = [
-            "nama" => $this->input->post('nama', true)
+            "nama" => $this->input->post('nama', true),
+            "no_hp" => $this->input->post('no_hp', true)
         ];
 
         $this->db->where('id', $id);
@@ -87,24 +89,82 @@ class Pernikahan_model extends CI_Model
 
     public function tambahHitungMundur()
     {
+        $id_user =  $this->session->userdata('id_user', true);
+        $tahun = $this->input->post('tahun', true);
+        $bulan = $this->input->post('bulan', true);
+        $hari = $this->input->post('hari', true);
+
         $data = [
-            "id_user" =>  $this->session->userdata('id_user', true),
-            "tahun" => $this->input->post('tahun', true),
-            "bulan" => $this->input->post('bulan', true),
-            "hari" => $this->input->post('hari', true)
+            "id_user" => $id_user,
+            "tahun" => $tahun,
+            "bulan" => $bulan,
+            "hari" => $hari
         ];
-        $this->db->insert('hitung_mundur', $data);
+
+        $this->db->set('tahun', $tahun);
+
+        $check = $this->db->get_where('hitung_mundur', ['id_user' => $id_user])->row();
+
+        if ($check->id_user == $id_user) {
+            $this->db->where('id_user',  $id_user);
+            $this->db->update('hitung_mundur', $data);
+        } else {
+            $this->db->insert('hitung_mundur', $data);
+        }
     }
 
     public function tambahAmplop()
     {
+        $id_user =  $this->session->userdata('id_user', true);
+        $nama_bank = $this->input->post('nama_bank', true);
+        $no_rek = $this->input->post('no_rek', true);
+        $an = $this->input->post('an', true);
+        $alamat = $this->input->post('alamat', true);
+        $no_hp = $this->input->post('no_hp', true);
+
         $data = [
-            "id_user" =>  $this->session->userdata('id_user', true),
-            "nama_bank" => $this->input->post('nama_bank', true),
-            "no_rek" => $this->input->post('no_rek', true),
-            "an" => $this->input->post('an', true),
-            "alamat" => $this->input->post('alamat', true)
+            "id_user" =>  $id_user,
+            "nama_bank" => $nama_bank,
+            "no_rek" => $no_rek,
+            "an" => $an,
+            "alamat" => $alamat,
+            "no_hp" => $no_hp
         ];
-        $this->db->insert('hadiah', $data);
+
+        $this->db->set('nama_bank', $nama_bank);
+
+        $check = $this->db->get_where('hadiah', ['id_user' => $id_user])->row();
+
+        if ($check->id_user == $id_user) {
+            $this->db->where('id_user',  $id_user);
+            $this->db->update('hadiah', $data);
+        } else {
+            $this->db->insert('hadiah', $data);
+        }
+    }
+
+    function simpanTemplate($id)
+    {
+        $id_user = $this->session->userdata('id_user');
+        $cek = $this->db->get_where('template_user', ['id_user' => $id_user]);
+
+        if ($cek->num_rows() > 0) {
+            $this->db->where('id_user', $id_user);
+            $save_data = $this->db->update('template_user', ['id_template' => $id]);
+        } else {
+            $save_data = $this->db->insert('template_user', ['id_template' => $id, "id_user" => $id_user]);
+        }
+
+        if ($save_data) {
+            $result = [
+                'success'   => true
+            ];
+        } else {
+            $result = [
+                'success'   => false
+            ];
+        }
+
+        return $result;
     }
 }

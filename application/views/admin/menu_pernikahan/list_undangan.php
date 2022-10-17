@@ -33,7 +33,7 @@
                             <td><?= $l['nama']; ?></td>
                             <td>
                                 <a href="<?= base_url(); ?>admin/edit_tamu/<?= $l['id']; ?>" class="btn btn-warning btn-circle">
-                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Edit
                                 </a>
                                 <a href="<?= base_url(); ?>admin/hapus_tamu/<?= $l['id']; ?>" class="btn btn-danger btn-circle" onclick="return confirm('Apa anda yakin?');">
                                     <i class="fas fa-trash"></i>

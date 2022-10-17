@@ -140,7 +140,7 @@
                         </div>
                         <div class="service-entry">
                             <h4>Background Musik</h4>
-                            <p>Hiasi undangan pernikahan online dengan musik kesukaanmu</p>
+                            <p>Hiasi undangan digital online dengan musik kesukaanmu</p>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                     <article class="post-wrap">
                         <div class="post">
                             <h2 class="entry-title"><a href="#0">Isi Informasi</a></h2>
-                            <p>Isi informasi mengenai mempelai, lokasi dan waktu acara, dan upload foto ke galeri</p>
+                            <p>Isi informasi mengenai biodata, lokasi, dan waktu acara, dan upload foto dari galeri</p>
                         </div>
                     </article>
                 </div>
@@ -230,9 +230,9 @@
                         <div class="col-6 col-md-6 mb-3 col-lg-3 mix web-design">
                             <div class="content">
                                 <div class="recent-work">
-                                    <img src="<?= base_url('assets/'); ?>images/work/soon.png" alt="">
+                                    <img src="<?= base_url('assets/'); ?>images/syukuran/desain/d1.png" alt="">
                                     <div class="overlay">
-                                        <h2><a href="<?= base_url('Lihat_halal'); ?>">Coming Soon</a></h2>
+                                        <h2><a href="<?= base_url('Lihat_syukuran'); ?>">Undangan Syukuran</a></h2>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +240,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-1-1"><a class="btn" href="#0">Lihat Lainnya</a></div>
+            <div class="col-1-1"><a class="btn" href="<?= base_url('Home/lihat_lainnya'); ?>">Lihat Lainnya</a></div>
         </section>
     </div>
     <!-- End Work Section -->
@@ -274,123 +274,53 @@
         </section>
     </div>
     <!-- End Quotes Section -->
-
+    <svg class="curveUpColor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M0 100 C 20 0 50 0 100 100 Z"></path>
+    </svg>
     <!-- Pricing Section -->
     <div class="wrap" id="harga">
         <div class="grid grid-pad">
-            <section id="price-tables">
-                <h3>Harga Undangan</h3>
-                <p>Paket undangan digital online sesuai dengan kebutuhanmu, tenang harganya terjangkau banget 😉</p>
-                <div class="row">
-                    <li class="plan col-6 col-md-6 mb-3 col-lg-3">
-                        <ul class="plan-wrap">
-                            <li class="title">
-                                <h4>Undangan
-                                    <br>
-                                    <br>
-                                    Ultah
-                                </h4>
-                            </li>
-                            <li class="price">
-                                <p>Rp 50.000</p>
-                            </li>
-                            <li>
-                                <ul class="options">
-                                    <li><?= $harga['fitur1']; ?></li>
-                                    <li><?= $harga['fitur2']; ?></li>
-                                    <li><?= $harga['fitur3']; ?></li>
-                                    <li><?= $harga['fitur4']; ?></li>
-                                    <li><?= $harga['fitur5']; ?></li>
-                                    <li><?= $harga['fitur6']; ?></li>
-                                    <li><?= $harga['fitur7']; ?></li>
-                                    <li><?= $harga['fitur8']; ?></li>
-                                    <li><?= $harga['fitur9']; ?></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="btn btn-price" href="<?= base_url('auth/registrasi'); ?>">Pilih Paket</a>
-                            </li>
+            <div class="content">
+                <div class="col-1-1">
+                    <section id="price-tables">
+                        <h3>Harga Undangan</h3>
+                        <p>Paket undangan digital online sesuai dengan kebutuhanmu, tenang harganya terjangkau banget 😉</p>
+                        <ul id="">
+                            <div class="row">
+                                <?php foreach ($harga as $h) : ?>
+                                    <li class="plan col-6 col-md-6 mb-3 col-lg-3">
+                                        <ul class="plan-wrap">
+                                            <li class="title">
+                                                <h2><?= $h['nama_undangan']; ?></h2>
+                                                <h4></h4>
+                                            </li>
+                                            <li class="price">
+                                                <p><?= $h['harga']; ?></p>
+                                            </li>
+                                            <li>
+                                                <ul class="options">
+                                                    <li><?= $h['fitur1']; ?></li>
+                                                    <li><?= $h['fitur2']; ?></li>
+                                                    <li><?= $h['fitur3']; ?></li>
+                                                    <li><?= $h['fitur4']; ?></li>
+                                                    <li><?= $h['fitur5']; ?></li>
+                                                    <li><?= $h['fitur6']; ?></li>
+                                                    <li><?= $h['fitur7']; ?></li>
+                                                    <li><?= $h['fitur8']; ?></li>
+                                                    <li><?= $h['fitur9']; ?></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a class="btn btn-price" href="<?= base_url('auth/registrasi'); ?>">Pilih Paket</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <?php endforeach; ?>
+                            </div>
                         </ul>
-                    </li>
-                    <li class="plan best-plan col-6 col-md-6 mb-3 col-lg-3">
-                        <ul class="plan-wrap">
-                            <li class="title">
-                                <h4 class="best-plan-title">Undangan<br>
-                                    <br>Pernikahan
-                                </h4>
-                            </li>
-                            <li class="price">
-                                <p class="best-plan-price"><?= $harga['harga']; ?></p>
-                            </li>
-                            <li>
-                                <ul class="options">
-                                    <li><?= $harga['fitur1']; ?></li>
-                                    <li><?= $harga['fitur2']; ?></li>
-                                    <li><?= $harga['fitur3']; ?></li>
-                                    <li><?= $harga['fitur4']; ?></li>
-                                    <li><?= $harga['fitur5']; ?></li>
-                                    <li><?= $harga['fitur6']; ?></li>
-                                    <li><?= $harga['fitur7']; ?></li>
-                                    <li><?= $harga['fitur8']; ?></li>
-                                    <li><?= $harga['fitur9']; ?></li>
-                                </ul>
-                            </li>
-                            <li><a class="btn btn-price btn-best-plan" href="<?= base_url('auth/registrasi'); ?>">Pilih Paket</a></li>
-                        </ul>
-                    </li>
-                    <li class="plan col-6 col-md-6 mb-3 col-lg-3">
-                        <ul class="plan-wrap">
-                            <li class="title">
-                                <h4>Undangan<br>
-                                    <br>Halal bi Halal
-                                </h4>
-                            </li>
-                            <li class="price">
-                                <p>Rp 50.000</p>
-                            </li>
-                            <li>
-                                <ul class="options">
-                                    <li><?= $harga['fitur1']; ?></li>
-                                    <li><?= $harga['fitur2']; ?></li>
-                                    <li><?= $harga['fitur3']; ?></li>
-                                    <li><?= $harga['fitur4']; ?></li>
-                                    <li><?= $harga['fitur5']; ?></li>
-                                    <li><?= $harga['fitur6']; ?></li>
-                                    <li><?= $harga['fitur7']; ?></li>
-                                    <li><?= $harga['fitur8']; ?></li>
-                                    <li><?= $harga['fitur9']; ?></li>
-                                </ul>
-                            </li>
-                            <li><a class="btn btn-price" href="<?= base_url('auth/registrasi'); ?>">Pilih Paket</a></li>
-                        </ul>
-                    </li>
-                    <li class="plan col-6 col-md-6 mb-3 col-lg-3">
-                        <ul class="plan-wrap">
-                            <li class="title">
-                                <h4>Coming<br><br>Soon
-                                </h4>
-                            </li>
-                            <li class="price">
-                                <p>x</p>
-                            </li>
-                            <li>
-                                <ul class="options">
-                                    <li>x</li>
-                                    <li>x</li>
-                                    <li>x</li>
-                                    <li>x</li>
-                                    <li>x</li>
-                                    <li>x</li>
-                                    <li>x</li>
-                                    <li>x</li>
-                                    <li>x</li>
-                                </ul>
-                            </li>
-                            <li><a class="btn btn-price btn-best-plan" href="">Pilih Paket</a></li>
-                        </ul>
-                    </li>
+                    </section>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
     <!-- End Pricing Section -->
@@ -421,7 +351,7 @@
                                 overflow: hidden;
                                 background: none !important;
                                 height: 500px;
-                                width: 1080px;
+                                width: 500px;
                             }
                         </style>
                     </div>
@@ -429,7 +359,6 @@
             </section>
         </div>
     </div>
-    <!-- End Parallax Section -->
 
     <!-- Contact Section -->
     <div class="wrap contact" id="contact">
@@ -438,12 +367,10 @@
             <div class="content address col-ml-2">
                 <h4>Apakah bisa di edit lagi?</h3>
                     <p>Undangan digital online kreativa.id dapat di edit kapanpun tanpa ada batas</p>
-                    <h4>Berapa undangan yang bisa dibuat?</h3>
-                        <p>Untuk saat ini satu akun dapat membuat 3 jenis undangan digital</p>
-                        <h4>Berapa lama proses pembuatannya?</h3>
-                            <p>Untuk pembuatan undangan digital online membutuhkan waktu sekitar 15 menit untuk mengisi data dan sudah bisa langsung disebar setelahnya</p>
-                            <h4>Apakah tema bisa di custom?</h3>
-                                <p>Mohon maaf, untuk saat ini tema undangan tidak dapat di custom, tapi Kami akan selalu mengembangkan tema sesuai dengan masukan dari pengguna 😉</p>
+                    <h4>Berapa lama proses pembuatannya?</h3>
+                        <p>Untuk pembuatan undangan digital online membutuhkan waktu sekitar 15 menit untuk mengisi data dan sudah bisa langsung disebar setelahnya</p>
+                        <h4>Apakah tema bisa di custom?</h3>
+                            <p>Mohon maaf, untuk saat ini tema undangan tidak dapat di custom, tapi Kami akan selalu mengembangkan tema sesuai dengan masukan dari pengguna 😉</p>
             </div>
         </div>
     </div>
@@ -473,9 +400,7 @@
                 <div class="col-1-1">
                     <div class="content">
                         <div class="social-set">
-                            <a href="#0"><i class="icon-facebook"></i></a>
-                            <a href="#0"><i class="icon-twitter"></i></a>
-                            <a href="#0"><i class="icon-instagram"></i></a>
+                            <!-- <a href="#0"><i class="icon-instagram"></i></a> -->
                         </div>
                         <p class="source-org copyright">© 2022 | All Rights Reserved Created By Progaming</a></p>
                     </div>

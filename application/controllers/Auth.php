@@ -61,7 +61,7 @@ class Auth extends CI_Controller
                         redirect('admin');
                     } else {
 
-                        redirect('dashboard');
+                        redirect('User');
                     }
                 } else {
                     $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">
@@ -138,7 +138,7 @@ class Auth extends CI_Controller
             // fitur untuk kirim data ke email
             $this->_sendEmail($token, 'verify');
             $this->session->set_flashdata('pesan', '<div class="alert alert-primary" role="alert">
-            Selamat, Akun anda sudah berhasil terdaftar!! Silahkan cek email anda untuk aktivasi akun! </div>');
+            Selamat, Akun anda sudah berhasil terdaftar!! Silahkan cek email anda untuk aktivasi akun atau periksa pada menu spam email! </div>');
             redirect('auth');
         }
     }
@@ -223,9 +223,6 @@ class Auth extends CI_Controller
         }
     }
 
-
-
-
     public function logout()
     {
         $this->session->unset_userdata('email');
@@ -234,6 +231,7 @@ class Auth extends CI_Controller
             Anda sudah Logout!! </div>');
         redirect('auth');
     }
+
     public function blocked()
     {
         $data['title'] = 'Validasi';
